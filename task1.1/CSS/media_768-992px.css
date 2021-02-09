@@ -1,0 +1,51 @@
+@media only screen and (max-width: 992px) {
+    .general-wrapper {
+        width: 100%;
+        height: auto;
+    }
+    .navigation-menu-wrapper {
+        flex-direction: row;
+        height: 20%;
+        width: 100%;
+        padding: 0px;
+    }
+    .navigation-menu-inner-wrapper {
+        width: 100%;
+        align-items: center;
+    }
+    .navigation-links-wrapper {
+        justify-content: space-between;
+        width: 80%;
+    }
+    .body-wrapper {
+        flex-direction: column;
+    }
+    .content-wrapper {
+        height: 80%;
+        width: 100%;
+    }
+    .navigation-menu-inner-wrapper, 
+    .navigation-links-wrapper {
+        flex-direction: row;
+    }
+    .navigation-links-wrapper__link {
+        flex-direction: column;
+    }
+    .navigation-menu-inner-wrapper__logo {
+        margin-right: 5%;
+    }
+    .navigation-links-wrapper__food::before, 
+    .navigation-links-wrapper__blog::before,
+    .navigation-links-wrapper__a-list::before,
+    .navigation-links-wrapper__camera::before, 
+    .navigation-links-wrapper__about::before {
+        margin-bottom: 10px;
+    }
+    .contacts-wrapper {
+        display: none;
+    }
+    .footer-wrapper {
+        width: 100%;
+        margin: 0;
+    }
+}

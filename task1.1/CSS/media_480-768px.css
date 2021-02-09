@@ -1,0 +1,52 @@
+@media only screen and (max-width: 768px) {
+    .general-wrapper {
+        width: 100%;
+        padding: 20px 10px 0px 10px;
+    }
+    .recipes-wrapper {
+        flex-wrap: wrap;
+        padding: 10px 20px 0px 20px;
+    }
+    .recipe-container {
+        width: 50%;
+    }
+    .banner-container {
+        margin: 0;
+    }
+    .banner-container__primary-title,
+    .banner-container__secondary-title {
+        width: 100%;
+    }
+    .toggle-slider-image-wrapper {
+        min-height: 400px;
+    }
+    .navigation-menu-inner-wrapper__logo {
+        margin-right: 2%;
+    }
+    .toggle-buttons-wrapper {
+        display: none;
+    }
+    .subscribe-wrapper {
+        flex-direction: column;
+    }
+    .subscribe-wrapper-submit-form {
+        margin-top: 20px;
+    }
+    .subscribe-wrapper-submit-form, .subscribe-inner-wrapper {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .subscribe-wrapper-submit-form__input {
+        flex-grow: 5;
+    }
+    .banner-container__primary-title {
+        opacity: 0.6;
+    }
+    .navigation-links-wrapper__food::before, 
+    .navigation-links-wrapper__blog::before,
+    .navigation-links-wrapper__a-list::before,
+    .navigation-links-wrapper__camera::before, 
+    .navigation-links-wrapper__about::before {
+        content: none;
+    }
+}

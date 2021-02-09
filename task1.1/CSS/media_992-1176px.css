@@ -1,0 +1,27 @@
+@media only screen and (max-width: 1175px) {
+    .general-wrapper {
+        width: 100%;
+    }
+    .navigation-menu-wrapper {
+        padding: 0 70px 0 25px;
+    }
+    .toggle-and-feedback-wrapper {
+        height: auto;
+    }
+    .toggle-buttons-wrapper {
+        height: 25%;
+    }
+    .menu-tile__title {
+        text-align: center;
+    }
+    .menu-tile {
+        height: auto;
+        padding: 10px 0px;
+    }
+    .menu-tile__description {
+        display: none;
+    }
+    .footer-wrapper {
+        margin-left: 25px;
+    }
+}
