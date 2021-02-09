@@ -1,0 +1,335 @@
+/* color-themes */
+.light {
+    color: #eff8f7;
+}
+.primary {
+    color: #34aca7;
+}
+.dark {
+    color: #000;
+}
+.white {
+    color: #fff;
+}
+.smokey {
+    color: #e5e5e5;
+}
+.light-active {
+    color: #d9efec;
+}
+/* font-types */
+.arial-font {
+    font-family: Arial;
+    font-weight: normal;
+}
+.verdana-font {
+    font-family: 'Verdana', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
+/* general styles */
+body {
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box;
+}
+.flex-container {
+    display: flex;
+}
+a {
+    text-decoration: none;
+}
+/* wrapper-styles */
+.general-wrapper {
+    margin: auto;
+    width: 1366px;
+    height: 1175px;
+    padding: 30px 20px;
+}
+.general-wrapper, 
+.navigation-menu-wrapper,
+.navigation-menu-inner-wrapper, 
+.navigation-links-wrapper, 
+.contacts-wrapper, 
+.content-wrapper,
+.toggle-slider-wrapper,
+.toggle-and-feedback-wrapper, 
+.extra-info-wrapper, 
+.recipe-container {
+    flex-direction: column;
+}
+.body-wrapper, 
+.toggle-buttons-wrapper, 
+.subscribe-wrapper, 
+.recipes-wrapper, 
+.footer-wrapper, 
+.social-networks-wrapper {
+    flex-direction: row;
+}
+.body-wrapper {
+    width: 100%;
+    height: 90%;
+}
+.footer-wrapper {
+    width: auto;
+    height: 10%;
+    border-top: 2px solid #E5E5E5;
+    padding-top: 25px;
+    justify-content: space-between;
+    margin-left: 125px;
+}
+.navigation-menu-wrapper {
+    width: 25%;
+    height: 100%;
+    padding: 0 50px 0 125px;
+}
+.content-wrapper {
+    width: 75%;
+    height: 100%;
+}
+.navigation-menu-inner-wrapper, .toggle-slider-wrapper {
+    height: 47.5%;
+}
+.navigation-menu-inner-wrapper {
+    overflow: hidden;
+    padding-bottom: 5%;
+}
+.contacts-wrapper, .toggle-and-feedback-wrapper {
+    height: 20%;
+}
+.recipes-wrapper {
+    height: auto;
+    padding-top: 10px;
+}
+.tweets-wrapper {
+    height: 45%;
+}
+.friends-wrapper {
+    height: 55%;
+}
+.navigation-menu-inner-wrapper__logo {
+    margin-bottom: 5px;
+    height: 30%;
+}
+.navigation-menu-inner-wrapper__logo > img {
+    height: 100%;
+}
+.navigation-links-wrapper {
+    justify-content: space-between;
+    height: 65%;
+}
+.toggle-slider-image-wrapper {
+    background-image: url(../res/images/banner-img.jpg);
+    height: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0 -50px;
+}
+.toggle-and-feedback-wrapper {
+    justify-content: start;
+}
+.toggle-buttons-wrapper {
+    justify-content: space-between;
+    height: 45%;
+}
+.subscribe-wrapper {
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 30px;
+    border-top: 1px dashed #E5E5E5;
+    border-bottom: 1px dashed #E5E5E5;
+    height: 35%;
+    padding: 20px;
+}
+/* styles */
+.navigation-links-wrapper__link {
+    display: flex;
+    align-items: center;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 14px;
+}
+.navigation-links-wrapper__food::before,
+.navigation-links-wrapper__blog::before,
+.navigation-links-wrapper__a-list::before,
+.navigation-links-wrapper__camera::before,
+.navigation-links-wrapper__about::before {
+    margin-right: 10px;
+}
+.navigation-links-wrapper__food::before {
+    content: url(../res/icons/food-icon.svg);
+}
+.navigation-links-wrapper__blog::before {
+    content: url(../res/icons/blog-icon.svg);
+}
+.navigation-links-wrapper__a-list::before {
+    content: url(../res/icons/a-list-icon.svg);
+}
+.navigation-links-wrapper__camera::before {
+    content: url(../res/icons/camera-icon.svg);
+}
+.navigation-links-wrapper__about::before {
+    content: url(../res/icons/about-icon.svg);
+}
+.aside-title {
+    font-family: 'Verdana', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 12px;
+    text-transform: uppercase;
+    border-bottom: dotted 1px #c4c4c4;
+    margin-bottom: 7px;
+}
+.tweets-wrapper__tweeter-ref {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 7px;
+    background-color: #ffffff;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    color: #34aca7;
+    cursor: pointer;
+}
+.tweets-wrapper__tweeter-ref:hover {
+    background-color: #34aca7;
+    color: #ffffff;
+}
+.tweets-wrapper__tweeter-ref-logo {
+    height: 12px;
+    margin-right: 5px;
+}
+.tweets-wrapper__tweeter-ref-title {
+    font-style: italic;
+    font-size: 10px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+}
+.friends-wrapper__friends-description {
+    font-style: italic;
+    font-size: 10px;
+    line-height: 19px;
+}
+.banner-container {
+    height: 100%;
+    margin-top: 30%;
+}
+.banner-container__primary-title {
+    width: 30%;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+    background-color: #fff;
+    padding: 15px 0px 15px 20px;
+}
+.banner-container__secondary-title {
+    width: 55%;
+    font-style: italic;
+    font-size: 14px;
+    line-height: 14px;
+    background-color:#000;
+    padding: 15px 0px 15px 20px;
+}
+.menu-tile {
+    height: 100%;
+    width: 25%;
+    padding: 20px 0px 10px 50px;
+    color: #34ACA7;
+    cursor: pointer;
+}
+.menu-tile:hover {
+    background-color: #D9EFEC;
+}
+.menu-tile__title {
+    font-size: 18px;
+    line-height: 18px;
+    margin-bottom: 0px;
+}
+.menu-tile__description {
+    font-style: italic;
+    font-size: 10px;
+    line-height: 19px;
+}
+.menu-tile-active {
+    background-color: #D9EFEC;
+}
+.menu-tile-inactive {
+    background-color:  #EFF8F7;
+}
+.subscribe-wrapper > * {
+    margin-right: 15px;
+}
+.subscribe-wrapper__description {
+    font-style: italic;
+    font-size: 14px;
+    line-height: 16px;
+}
+.subscribe-wrapper__input {
+    border: 1px solid #E5E5E5;
+}
+.subscribe-wrapper__input::placeholder {
+    color: #e5e5e5;
+}
+.subscribe-wrapper__submit-button {
+    border: 1px solid #E5E5E5;
+    border-radius: 2px;
+    padding: 3px 5px;
+    background: linear-gradient(180deg, #F4F3F3 0%, #BBB9B9 100%);
+}
+.recipe-container {
+    width: 25%;
+    padding-right: 30px;
+    letter-spacing: -0.02em;
+}
+.recipe-container__article-title {
+    font-size: 16px;
+    line-height: 21px;
+}
+.recipe-container__article-description {
+    font-size: 14px;
+    line-height: 20px;
+}
+.article-img-container > img {
+    box-shadow: 0 0 5px 1px #e5e5e5;
+}
+.date-container__article-date, .date-container__read-ref {
+    font-size: 14px;
+    line-height: 20px;
+}
+.extra-info-wrapper__license {
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: -0.02em;
+}
+.privacy-container > a {
+    text-decoration: none;
+    color:  #34aca7;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: -0.02em;
+}
+.privacy-container__privacy::after,
+.privacy-container__terms::after {
+    content: '|';
+    color: #e5e5e5;
+    margin-left: 5px;
+}
+.extra-info-wrapper__license::before {
+    content: '\A9';
+}
+.social-networks-wrapper > div {
+    margin-left: 10px;
+}
+.social-networks-wrapper__tweeter-logo::before {
+    content: url(../res/icons/tweeter-icon-grey.svg);
+}
+.social-networks-wrapper__facebook-logo::before {
+    content: url(../res/icons/facebook-icon-grey.svg);
+}
+.social-networks-wrapper__rss-logo::before {
+    content: url(../res/icons/rss-icon-grey.svg);
+}
