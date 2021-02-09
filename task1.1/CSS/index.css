@@ -314,11 +314,3 @@ a {
 .social-networks-wrapper__rss-logo::before {
     content: url(../res/icons/rss-icon-grey.svg);
 }
-/* media-queries */
-@import "media_992-1176px.css";
-
-@import "media_768-992px.css";
-
-@import "media_480-768px.css";
-
-@import "media_less-than-480px.css";

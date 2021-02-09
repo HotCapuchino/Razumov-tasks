@@ -1,3 +1,5 @@
+@import "media_480-768px.css";
+
 @media only screen and (max-width: 480px) {
     .general-wrapper {
         padding: 0;
