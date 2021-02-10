@@ -10,7 +10,7 @@
     <div class="general-wrapper flex-container">
         <div class="body-wrapper flex-container">
             <nav class="navigation-menu-wrapper flex-container">
-                <div class="navigation-menu-inner-wrapper">
+                <div class="navigation-menu-inner-wrapper flex-container">
                     <div class="navigation-menu-inner-wrapper__logo">
                         <img src="../res/icons/icon-logo.svg">
                     </div>
@@ -36,7 +36,6 @@
                     <div class="tweets-wrapper">
                         <div class="aside-title">Latest Tweet</div>
                         <button class="tweets-wrapper__tweeter-ref">
-                            <img class="tweets-wrapper__tweeter-ref-logo" src="../res/icons/twitter-icon.svg" alt="">
                             <div class="tweets-wrapper__tweeter-ref-title arial-font">Join the Conversation</div>
                         </button>
                     </div>
@@ -46,7 +45,6 @@
                             community recommendations, and more, 
                             like us on Facebook.</div>
                         <button class="tweets-wrapper__tweeter-ref">
-                            <img class="tweets-wrapper__tweeter-ref-logo" src="../res/icons/twitter-icon.svg" alt="">
                             <div class="tweets-wrapper__tweeter-ref-title">Join the Community</div>
                         </button>
                     </div>
@@ -54,7 +52,7 @@
             </nav>
             <main class="content-wrapper flex-container">
                 <div class="toggle-slider-wrapper flex-container">
-                    <div class="toggle-slider-image-wrapper">
+                    <div class="toggle-slider-image-wrapper flex-container">
                         <div class="banner-container">
                             <div class="banner-container__primary-title arial-font">Share your food sense</div>
                             <div class="banner-container__secondary-title arial-font white">
@@ -82,17 +80,21 @@
                             <div class="menu-tile__description arial-font primary">We want to hear from you!</div>
                         </div>
                     </div>
-                    <form class="subscribe-wrapper flex-container">
-                        <div class="subscribe-wrapper__logo">
-                            <img src="../res/icons/mail-icon.svg">
-                        </div>
-                        <div class="subscribe-wrapper__description arial-font dark">
-                            Sign up for out newsletter to receive a handpicked selection of the best stories, 
-                            recipes, and news, delivered weekly to your inbox.
-                        </div>
-                        <input type="email" class="subscribe-wrapper__input" placeholder="Email">
-                        <button class="subscribe-wrapper__submit-button arial-font" type="submit">Subscribe</button>   
-                    </form>
+                    <div class="subscribe-wrapper flex-container">
+                        <div class="subscribe-inner-wrapper flex-container">
+                            <div class="subscribe-inner-wrapper__logo">
+                                <img src="../res/icons/mail-icon.svg">
+                            </div>
+                            <div class="subscribe-inner-wrapper__description arial-font dark">
+                                Sign up for out newsletter to receive a handpicked selection of the best stories, 
+                                recipes, and news, delivered weekly to your inbox.
+                            </div>
+                        </div>  
+                        <form class="subscribe-wrapper-submit-form flex-container">
+                            <input type="email" class="subscribe-wrapper-submit-form__input" placeholder="Email">
+                            <button class="subscribe-wrapper-submit-form__submit-button arial-font" type="submit">Subscribe</button>
+                        </form>   
+                    </div>
                 </div>
                 <div class="recipes-wrapper flex-container">
                     <div class="recipe-container">
