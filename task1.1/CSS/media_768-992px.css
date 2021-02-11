@@ -1,8 +1,8 @@
 @import "media_992-1176px.css";
 
 @media only screen and (max-width: 992px) {
+    /* wrappers style */
     .general-wrapper {
-        width: 100%;
         height: auto;
     }
     .navigation-menu-wrapper {
@@ -30,6 +30,14 @@
     .navigation-links-wrapper {
         flex-direction: row;
     }
+    .contacts-wrapper {
+        display: none;
+    }
+    .footer-wrapper {
+        width: 100%;
+        margin: 0;
+    }
+    /* elems style */
     .navigation-links-wrapper__link {
         flex-direction: column;
     }
@@ -42,12 +50,5 @@
     .navigation-links-wrapper__camera::before, 
     .navigation-links-wrapper__about::before {
         margin-bottom: 10px;
-    }
-    .contacts-wrapper {
-        display: none;
-    }
-    .footer-wrapper {
-        width: 100%;
-        margin: 0;
     }
 }

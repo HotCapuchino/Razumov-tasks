@@ -1,8 +1,8 @@
 @import "media_768-992px.css";
 
 @media only screen and (max-width: 768px) {
+    /* wrappers style */
     .general-wrapper {
-        width: 100%;
         padding: 20px 10px 0px 10px;
     }
     .recipes-wrapper {
@@ -14,10 +14,6 @@
     }
     .banner-container {
         margin: 0;
-    }
-    .banner-container__primary-title,
-    .banner-container__secondary-title {
-        width: 100%;
     }
     .toggle-slider-image-wrapper {
         min-height: 400px;
@@ -38,8 +34,13 @@
         width: 100%;
         justify-content: space-between;
     }
+    /* elems style */
     .subscribe-wrapper-submit-form__input {
         flex-grow: 5;
+    }
+    .banner-container__primary-title,
+    .banner-container__secondary-title {
+        width: 100%;
     }
     .banner-container__primary-title {
         opacity: 0.6;
