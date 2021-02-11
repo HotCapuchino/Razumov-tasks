@@ -28,4 +28,7 @@
         width: auto;
         margin: 0px 10px;
     }
+    .subscribe-wrapper-submit-form__input {
+        margin-bottom: 10px;
+    }
 }

@@ -29,10 +29,12 @@
     }
     .subscribe-wrapper-submit-form {
         margin-top: 20px;
+        flex-wrap: wrap;
     }
     .subscribe-wrapper-submit-form, .subscribe-inner-wrapper {
         width: 100%;
         justify-content: space-between;
+        align-items: flex-start;
     }
     /* elems style */
     .subscribe-wrapper-submit-form__input {
