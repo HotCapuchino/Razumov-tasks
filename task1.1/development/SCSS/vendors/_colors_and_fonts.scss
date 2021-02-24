@@ -1,0 +1,39 @@
+/* color-themes */ 
+$light: #eff8f7;
+$primary: #34aca7;
+$dark: #000;
+$white: #fff;
+$smokey: #e5e5e5;
+$light-active: #d9efec;
+// .light {
+//     color: #eff8f7;
+// }
+// .primary {
+//     color: #34aca7;
+// }
+// .dark {
+//     color: #000;
+// }
+// .white {
+//     color: #fff;
+// }
+// .smokey {
+//     color: #e5e5e5;
+// }
+// .light-active {
+//     color: #d9efec;
+// }
+/* font-types */
+@mixin font($font) {
+    font-family: $font, sans-serif;
+    font-weight: normal;
+}
+// .arial-font {
+//     font-family: Arial;
+//     font-weight: normal;
+// }
+// .verdana-font {
+//     font-family: 'Verdana', sans-serif;
+//     font-style: normal;
+//     font-weight: normal;
+// }
