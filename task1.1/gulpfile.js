@@ -5,7 +5,6 @@ const del = require('del');
 const htmlmin = require('gulp-htmlmin');
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
-const reload = browserSync.reload;
 const imagemin = require('gulp-imagemin');
 const cssmin = require('gulp-cssmin');
 
@@ -17,7 +16,7 @@ function minifyHTML() {
     return src('build/html/*.html')
     .pipe(htmlmin({
         collapseWhitespace: true
-    })).pipe(dest('build/html'));
+    })).pipe(dest('build'));
 }
 
 function gatherHTML() {
@@ -25,7 +24,7 @@ function gatherHTML() {
         .pipe(include({
             prefix: '@@'
         }))
-        .pipe(dest('build/html'));
+        .pipe(dest('build'));
 }
 
 function translateSCSS() {
@@ -35,9 +34,9 @@ function translateSCSS() {
 }
 
 function minifyCSS() {
-    return src('build/CSS/*.scss')
+    return src('build/css/*.css')
     .pipe(cssmin())
-    .pipe()
+    .pipe(dest('build/css'))
 }
 
 function addCrossBrowserSupport() {
@@ -52,12 +51,12 @@ function addCrossBrowserSupport() {
 function trackChanges() {
     browserSync.init({
         server: { 
-            baseDir: './build/html'
+            baseDir: './build'
         }
     });
-    watch('./development/**.html', gatherHTML).on('change', reload);
-    watch('./development/**.scss', series(translateSCSS, addCrossBrowserSupport)).on('change', reload);
-    watch('./development/res/**', addResources).on('change', reload);
+    watch('./development/**.html', gatherHTML).on('change', browserSync.reload);
+    watch('./development/**.scss', series(translateSCSS, addCrossBrowserSupport)).on('change', browserSync.reload);
+    watch('./development/res/**', addResources).on('change', browserSync.reload);
 }
 
 function addResources() {
