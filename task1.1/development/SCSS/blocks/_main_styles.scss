@@ -145,15 +145,15 @@
     padding: 20px 0px 10px 50px;
     color: $primary;
     cursor: pointer;
+    &:hover {
+        background-color: $light-active;
+    }
     @include font('Arial');
 
     @include _max1175 {
         height: auto;
         padding: 10px 0px;
     }
-}
-.menu-tile:hover {
-    background-color: $light-active;
 }
 .menu-tile__title {
     font-size: 18px;
@@ -244,90 +244,3 @@
     line-height: 12px;
     letter-spacing: -0.02em;
 }
-/* media */
-// @media only screen and (max-width: 1175px) {
-//     /* wrappers queries */
-//     .toggle-buttons-wrapper {
-//         height: 25%;
-//     }
-//     .subcribe-wrapper {
-//         height: auto;
-//     }
-//     /* elements queries */
-//     .menu-tile__title {
-//         text-align: center;
-//     }
-//     .menu-tile {
-//         height: auto;
-//         padding: 10px 0px;
-//     }
-//     .menu-tile__description {
-//         display: none;
-//     }
-// }
-
-// @media only screen and (max-width: 992px) {
-//     /* wrappers queries */
-//     .content-wrapper {
-//         height: 80%;
-//         width: 100%;
-//     }
-//  }
-
-//  @media only screen and (max-width: 768px) {
-//      /* wrappers queries */
-//     .recipes-wrapper {
-//         flex-wrap: wrap;
-//         padding: 10px 20px 0px 20px;
-//     }
-//     .recipe-container {
-//         width: 50%;
-//     }
-//     .banner-container {
-//         margin: 0;
-//     }
-//     .toggle-slider-image-wrapper {
-//         min-height: 400px;
-//     }
-//     .toggle-buttons-wrapper {
-//         display: none;
-//     }
-//     .subscribe-wrapper {
-//         flex-direction: column;
-//     }
-//     .subscribe-wrapper-submit-form {
-//         margin-top: 20px;
-//         flex-wrap: wrap;
-//     }
-//     .subscribe-wrapper-submit-form, .subscribe-inner-wrapper {
-//         width: 100%;
-//         justify-content: space-between;
-//         align-items: flex-start;
-//     }
-//     /* elements queries */
-//     .subscribe-wrapper-submit-form__input {
-//         flex-grow: 5;
-//     }
-//     .banner-container__primary-title,
-//     .banner-container__secondary-title {
-//         width: 100%;
-//     }
-//     .banner-container__primary-title {
-//         opacity: 0.6;
-//     }
-// }
-
-// @media only screen and (max-width: 480px) { 
-//     /* wrappers queries */
-//     .toggle-slider-image-wrapper {
-//         min-height: 300px;
-//     }
-//     .recipe-container {
-//         width: 100%;
-//         margin-bottom: 20px;
-//     }
-//     /* elements queries */
-//     .subscribe-wrapper-submit-form__input {
-//         margin-bottom: 10px;
-//     }
-// }

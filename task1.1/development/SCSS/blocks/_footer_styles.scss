@@ -1,5 +1,5 @@
-@import 'vendors/colors_and_fonts.scss';
 @import '../media/media';
+@import 'vendors/colors_and_fonts.scss';
 /* wrappers style */
 .footer-wrapper {
     @include font('Arial');
@@ -55,35 +55,8 @@
         margin-left: 10px;
     }
 }
-.social-networks-wrapper__tweeter-logo::before {
-    content: url(../res/icons/tweeter-icon-grey.svg);
+@each $logo in (tweeter, facebook, rss) {
+    .social-networks-wrapper__#{$logo}-logo::before {
+        content: url(../res/icons/#{$logo}-icon-grey.svg);
+    }
 }
-.social-networks-wrapper__facebook-logo::before {
-    content: url(../res/icons/facebook-icon-grey.svg);
-}
-.social-networks-wrapper__rss-logo::before {
-    content: url(../res/icons/rss-icon-grey.svg);
-}
-
-// @media only screen and (max-width: 1175px) { 
-//     /* wrappers queries */
-//     .footer-wrapper {
-//         margin-left: 25px;
-//     }
-// }
-
-// @media only screen and (max-width: 992px) { 
-//     /* wrappers queries */
-//     .footer-wrapper {
-//         width: 100%;
-//         margin: 0;
-//     }
-// }
-
-// @media only screen and (max-width: 480px) { 
-//     /* wrappers queries */
-//     .footer-wrapper {
-//         width: auto;
-//         margin: 0px 10px;
-//     }
-// }
