@@ -1,0 +1,29 @@
+/* color-themes */
+.light {
+    color: #eff8f7;
+}
+.primary {
+    color: #34aca7;
+}
+.dark {
+    color: #000;
+}
+.white {
+    color: #fff;
+}
+.smokey {
+    color: #e5e5e5;
+}
+.light-active {
+    color: #d9efec;
+}
+/* font-types */
+.arial-font {
+    font-family: Arial;
+    font-weight: normal;
+}
+.verdana-font {
+    font-family: 'Verdana', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
