@@ -1,4 +1,4 @@
-const { series, src, dest, watch } = require('gulp');
+const { series, src, dest, watch, parallel } = require('gulp');
 const sass = require('gulp-sass');
 const include = require('gulp-file-include');
 const del = require('del');
@@ -7,45 +7,33 @@ const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync').create();
 const imagemin = require('gulp-imagemin');
 const cssmin = require('gulp-cssmin');
+const concat = require('gulp-concat');
 
 function clean() {
     return del('build');
 }
 
-function minifyHTML() {
-    return src('build/html/*.html')
-    .pipe(htmlmin({
-        collapseWhitespace: true
-    })).pipe(dest('build'));
-}
-
-function gatherHTML() {
-    return src('development/HTML/**.html')
+function html() {
+    return src(['development/HTML/**/*.html', '!development/HTML/**/_*.html'])
         .pipe(include({
             prefix: '@@'
         }))
-        .pipe(dest('build'));
+        .pipe(htmlmin({
+            collapseWhitespace: true
+        })).pipe(dest('build'));
 }
 
-function translateSCSS() {
+function scss() {
     return src('development/SCSS/*.scss')
     .pipe(sass())
-    .pipe(dest('build/css'));
-}
-
-function minifyCSS() {
-    return src('build/css/*.css')
-    .pipe(cssmin())
-    .pipe(dest('build/css'))
-}
-
-function addCrossBrowserSupport() {
-    return src('build/css/*.css')
     .pipe(autoprefixer({
         overrideBrowserslist: ['last 3 versions'],
         cascade: false
     }))
-    .pipe(dest('build/css'));
+    .pipe(cssmin())
+    .pipe(concat('index.min.css'))
+    .pipe(dest('build/css'))
+    .pipe(browserSync.stream());
 }
 
 function trackChanges() {
@@ -54,21 +42,22 @@ function trackChanges() {
             baseDir: './build'
         }
     });
-    watch('./development/**.html', gatherHTML).on('change', browserSync.reload);
-    watch('./development/**.scss', series(translateSCSS, addCrossBrowserSupport)).on('change', browserSync.reload);
-    watch('./development/res/**', addResources).on('change', browserSync.reload);
+    watch('./development/**/*.html').on('change', browserSync.reload);
+    watch('./development/**/*.html', html);
+    watch('./development/**/*.scss', scss);
+    watch('./development/res/**/*', series(deleteResources, addResources)).on('change', browserSync.reload);
 }
 
 function addResources() {
-    return src('development/res/**')
-    .pipe(dest('build/res/'));
-}
-
-function compressResources() {
-    return src('build/res/**')
+    return src('development/res/**/*')
     .pipe(imagemin())
-    .pipe(dest('build/res/'));
+    .pipe(dest('build/res/'))
+    .pipe(browserSync.stream());
 }
 
-exports.development = series(clean, gatherHTML, translateSCSS, addCrossBrowserSupport, addResources, trackChanges);
-exports.production = series(clean, gatherHTML, minifyHTML, translateSCSS, addCrossBrowserSupport, minifyCSS, addResources, compressResources);
+function deleteResources() {
+    return del('build/res');
+}
+
+exports.build = series(clean, parallel(html, scss, addResources, trackChanges));
+// exports.dev = series(cle)
