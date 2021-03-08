@@ -14,7 +14,7 @@ function clean() {
 }
 
 function html() {
-    return src(['development/HTML/**/*.html', '!development/HTML/**/_*.html'])
+    return src(['src/html/**/*.html', '!src/html/**/_*.html'])
         .pipe(include({
             prefix: '@@'
         }))
@@ -24,7 +24,7 @@ function html() {
 }
 
 function scss() {
-    return src('development/SCSS/*.scss')
+    return src('src/scss/*.scss')
     .pipe(sass())
     .pipe(autoprefixer({
         overrideBrowserslist: ['last 3 versions'],
@@ -42,14 +42,14 @@ function trackChanges() {
             baseDir: './build'
         }
     });
-    watch('./development/**/*.html').on('change', browserSync.reload);
-    watch('./development/**/*.html', html);
-    watch('./development/**/*.scss', scss);
-    watch('./development/res/**/*', series(deleteResources, addResources)).on('change', browserSync.reload);
+    watch('./src/**/*.html').on('change', browserSync.reload);
+    watch('./src/**/*.html', html);
+    watch('./src/**/*.scss', scss);
+    watch('./src/res/**/*', series(deleteResources, addResources)).on('change', browserSync.reload);
 }
 
 function addResources() {
-    return src('development/res/**/*')
+    return src('src/res/**/*')
     .pipe(imagemin())
     .pipe(dest('build/res/'))
     .pipe(browserSync.stream());
@@ -59,5 +59,5 @@ function deleteResources() {
     return del('build/res');
 }
 
-exports.build = series(clean, parallel(html, scss, addResources, trackChanges));
-// exports.dev = series(cle)
+exports.dev = series(clean, parallel(html, scss, addResources, trackChanges));
+exports.build = series(clean, parallel(html, scss, addResources));

@@ -1,14 +1,19 @@
-@import '../media/media';
-@import 'vendors/colors_and_fonts.scss';
+// imports
+@import '../common/layout';
+@import '../mixins/media';
+@import '../mixins/fonts';
+@import 'variables/colors_and_fonts.scss';
 /* wrappers style */
-.footer-wrapper {
-    @include font('Arial');
+.footer {
+    @extend .flex-container;
+    @extend .flex-row;
     width: auto;
     height: 8%;
     border-top: 2px solid $light-active;
     padding-top: 25px;
     justify-content: space-between;
     margin-left: 75px;
+    @include font-type('Arial', normal);
 
     @include _max1175 {
         margin-left: 25px;
@@ -22,41 +27,46 @@
         margin: 0px 10px;
     }
 }
+.footer-nav {
+    @extend .flex-container;
+    @extend .flex-column;
+    &__license {
+        color: $smokey;
+        letter-spacing: -0.02em;
+        &::before {
+            content: '\A9';
+        }
+        @include font-options(12px, 12px);
+    }
+}
 .social-networks-wrapper {
     flex-wrap: wrap;
 }
 /* elements style */
-.extra-info-wrapper__license {
-    color: $smokey;
-    font-size: 12px;
-    line-height: 12px;
-    letter-spacing: -0.02em;
-    &::before {
-        content: '\A9';
-    }
-}
-.privacy-container  {
+.privacy  {
+    margin-bottom: 10px;
     a {
         text-decoration: none;
-        font-size: 12px;
-        line-height: 12px;
         letter-spacing: -0.02em;
         color:  $primary;
+        @include font-options(12px, 12px);
     }
 }
-.privacy-container__privacy::after,
-.privacy-container__terms::after {
+.privacy__privacy::after,
+.privacy__terms::after {
     content: '|';
     color: $light-active;
     margin-left: 5px;
 }
-.social-networks-wrapper {
+.social-networks {
+    @extend .flex-container;
+    @extend .flex-row;
     div {
         margin-left: 10px;
     }
 }
 @each $logo in (tweeter, facebook, rss) {
-    .social-networks-wrapper__#{$logo}-logo::before {
+    .social-networks__#{$logo}-logo::before {
         content: url(../res/icons/#{$logo}-icon-grey.svg);
     }
 }

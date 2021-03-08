@@ -1,6 +1,6 @@
 @mixin _min1176 {
     @media only screen and (min-width: 1176px) {
-        @content;
+        @content; 
     }
 }
 
