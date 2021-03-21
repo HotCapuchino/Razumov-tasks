@@ -14,7 +14,7 @@ function clean() {
 }
 
 function html() {
-    return src(['src/html/**/*.html', '!src/html/**/_*.html'])
+    return src(['src/**/*.html', '!src/**/_*.html'])
         .pipe(include({
             prefix: '@@'
         }))
@@ -39,7 +39,7 @@ function scss() {
 function trackChanges() {
     browserSync.init({
         server: { 
-            baseDir: './build'
+            baseDir: 'build'
         }
     });
     watch('./src/**/*.html').on('change', browserSync.reload);
