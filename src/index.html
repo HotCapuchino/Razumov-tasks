@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./styles/index.css">
+    <title>Snake game</title>
+</head>
+<body>
+    <div class="general-wrapper">
+        <div class="start-menu">
+            <h2 class="start-menu__title">Choose game options!</h2>
+            <div class="game-options">
+                <div class="game-options__difficulty-title">Choose difficulty level:</div>
+                <select class="game-options__difficulty-select" id="difficulty">
+                    <option value="easy" class="game-options__difficulty-level">Easy</option>
+                    <option value="medium" class="game-options__difficulty-level">Medium</option>
+                    <option value="hard" class="game-options__difficulty-level">Hard</option>
+                    <option value="extreme" class="game-options__difficulty-level">Extreme</option>
+                </select>
+                <div class="game-options__walls-enabling">Enable walls?</div>
+                <input type="checkbox" class="game-options__enable-walls-checkbox" checked id="walls-enabling">
+                <div class="game-options__color-theme-title">Choose Color Theme</div>
+                <select class="game-options__color-theme-select" id="color-theme">
+                    <option value="default" class="game-options__theme">Default</option>
+                    <option value="cyberpunky" class="game-options__theme">Cyberbpunky</option>
+                    <option value="synthwave" class="game-options__theme">Synthwave</option>
+                    <option value="hacker" class="game-options__theme">Hacker</option>
+                    <option value="vomit" class="game-options__theme">Vomit</option>
+                </select>
+            </div>
+            <button class="start-menu__play-button" id="start-game">Play</button>
+        </div>
+        <div class="results none">
+            <div class="results__score-title">Your score:</div>
+            <div class="results__user-score" id="score"></div>
+            <button class="results__restart-game" id="restart">Restart game</button>
+        </div>
+        <canvas id="canvas" width="1000" height="800"></canvas>
+    </div>
+    
+    <script src="./scripts/index.js"></script>
+</body>
+</html>

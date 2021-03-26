@@ -1,8 +1,8 @@
 {
-  "name": "task2",
+  "name": "game",
   "version": "1.0.0",
-  "description": "",
-  "main": "main.js",
+  "description": "Здесь будут задания по курсу фронтэнд разработки",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,26 @@
   "bugs": {
     "url": "https://github.com/HotCapuchino/Razumov-tasks/issues"
   },
-  "homepage": "https://github.com/HotCapuchino/Razumov-tasks#readme"
+  "homepage": "https://github.com/HotCapuchino/Razumov-tasks#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/eslint-parser": "^7.13.10",
+    "@babel/node": "^7.13.12",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/register": "^7.13.8",
+    "babelify": "^10.0.0",
+    "browser-sync": "^2.26.14",
+    "browserify": "^17.0.0",
+    "del": "^6.0.0",
+    "eslint": "^7.22.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-uglify": "^3.0.2",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "dependencies": {}
 }

@@ -1,0 +1,36 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #1e1e1e;
+}
+.general-wrapper {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#canvas {
+    height: 90vh;
+    border: 10px solid;
+    border-color: #f0f0f0;
+    background-color: #141414;
+}
+.start-menu, .results {
+    position: absolute;
+    background-color: #131212;
+    color: white;
+    padding: 40px;
+    font-family: 'Roboto', sans-serif;
+}
+.start-menu select {
+    background-color: #131212;
+    color: white;
+}
+select option:hover {
+    color: white;
+    box-shadow: 0 0 10px 100px white;
+}
+.none {
+    display: none;
+}
