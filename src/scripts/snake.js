@@ -50,12 +50,12 @@ class Snake {
 
     changeDirection(direction) {
         if(directions.hasOwnProperty(direction)) {
-            if ((this.head.direction == directions.right && direction == 'left') 
-            || (this.head.direction == direction.left && direction == 'right')) {
+            if ((this.head.direction === 'left' && direction === 'right') ||
+                (this.head.direction === 'right' && direction === 'left')) {
                 return;
             }
-            if ((this.head.direction == directions.up && direction == 'down')
-            || (this.head.direction == directions.down && direction == 'up')) {
+            if ((this.head.direction === 'up' && direction === 'down')
+            || (this.head.direction === 'down' && direction === 'up')) {
                 return;
             }
             this.head.direction = direction;
@@ -93,10 +93,6 @@ class Snake {
             x: new_x,
             y: new_y,
         });
-        for (let i = 1; i < this.body.length; i++) {
-            this.body[i].x = this.body[i - 1].x;
-            this.body[i].y = this.body[i - 1].y;
-        }
     }
 
     draw() {

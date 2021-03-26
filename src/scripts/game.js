@@ -16,18 +16,33 @@ class SnakeGame {
             this.color_theme.canvas_color, 
             this.color_theme.snake_head_color,
             this.color_theme.snake_body_color);
+        this.close_game_event = new Event('close_game');
+        this.user_died_event = new Event('user_died');
         document.addEventListener('keydown', (event) => {
-            switch(event.which) {
-                case 38 || 87: this.snake.changeDirection('up');
+            let pressed_key = event.key;
+            switch(true) {
+                case pressed_key == 'ArrowUp' ||  pressed_key == 'w': this.snake.changeDirection('up');
                 break; 
-                case 39 || 68: this.snake.changeDirection('right');
+                case pressed_key == 'ArrowRight' || pressed_key == 'd': this.snake.changeDirection('right');
                 break;
-                case 40 || 83: this.snake.changeDirection('down');
+                case pressed_key == 'ArrowDown' || pressed_key == 's': this.snake.changeDirection('down');
                 break; 
-                case 37 || 65: this.snake.changeDirection('left');
+                case pressed_key == 'ArrowLeft' || pressed_key == 'a': this.snake.changeDirection('left');
                 break; 
+                case pressed_key == 'Escape': {
+                    document.dispatchEvent(this.close_game_event);
+                }
                 default: break;
             }
+        });
+        document.addEventListener('close_game', () => {
+            this._end();
+            window.ctx.clearRect(0, 0, window.canvas.width, window.canvas.height);
+            document.querySelector('.start-menu').classList.remove('none');
+        });
+        document.addEventListener('user_died', () => {
+            this._end(); 
+            this.showResults(); 
         });
         this.username_points = 0;
     }
@@ -38,7 +53,7 @@ class SnakeGame {
             this.point.draw();
             this.snake.move();
             if (this.snake.isDead()) {
-                this.end();
+                document.dispatchEvent(this.user_died_event);
             }
             if (!this.enabled_walls) {
                 if (this.snake.head.x > window.canvas.width) {
@@ -58,7 +73,7 @@ class SnakeGame {
                     this.snake.head.x < 0 ||
                     this.snake.head.y > window.canvas.height ||
                     this.snake.head.y < 0) {
-                        this.end();
+                    document.dispatchEvent(this.user_died_event);
                 }
             }
             this.snake.draw();
@@ -85,9 +100,8 @@ class SnakeGame {
         }, this.velocity);
     }
 
-    end() {
+    _end() {
         clearInterval(this.game_interval);
-        this.showResults();
     }
 
     showResults() {

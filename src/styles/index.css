@@ -2,6 +2,7 @@ body {
     padding: 0;
     margin: 0;
     background-color: #1e1e1e;
+    font-family: 'Roboto', sans-serif;
 }
 .general-wrapper {
     width: 100%;
@@ -33,4 +34,30 @@ select option:hover {
 }
 .none {
     display: none;
+}
+.game-options__difficulty-title,
+.game-options__walls-enabling, 
+.game-options__color-theme-title, 
+.results__score-title, 
+.user-guide__gameplay-description {
+    margin-bottom: 5px;
+}
+input, select, 
+.results__user-score,
+.user-guide__quit-description {
+    margin-bottom: 12px;
+}
+.start-menu__play-button, 
+.results__restart-game {
+    padding: 3px 17px;
+    background-color: #131212;
+    border: 1px solid white;
+    color: white;
+    cursor: pointer;
+}
+.start-menu__play-button:hover,
+.results__restart-game:hover {
+    background-color: white;
+    border-color:#141414;
+    color: #131212;
 }
