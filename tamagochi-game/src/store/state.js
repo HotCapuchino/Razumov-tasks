@@ -1,5 +1,3 @@
-import React from 'react';
-
 const petStat = {
     health: {
         level: 100,
@@ -94,24 +92,7 @@ const petStat = {
                 exhaustion: 10
             }
         }
-    },
-    setProperty(property, value) {
-        console.log(property, value);
-        if (this[property]['level'] + value > 100) {
-            this[property]['level'] = 100;
-            console.log(property, this[property]['level']);
-            return;
-        }
-        if (this[property]['level'] + value < 0) {
-            this[property]['level'] = 100;
-            console.log(property, this[property]['level']);
-            return;
-        }
-        this[property]['level'] += value;
-        console.log(property, this[property]['level']);
-    }, 
+    }
 }
 
-const PetContext = React.createContext(petStat);
-
-export {petStat, PetContext};
+export {petStat};

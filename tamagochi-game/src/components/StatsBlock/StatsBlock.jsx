@@ -1,37 +1,29 @@
-import React, { Component } from 'react';
-import { PetContext, petStat } from '../../store/state';
+import React, { useReducer, useEffect } from 'react';
+import { petStat } from '../../store/state';
+import reducer from '../../store/reducer';
 import SingleStat from '../SingleStat/SingleStat';
 import statsBlockStyles from './StatsBlock.module.scss';
 
+function StatsBlock() {
+    
+    const [state] = useReducer(reducer, petStat);
+    useEffect(() => {
+        console.log(state);
+    }, [state])
 
-export class StatsBlock extends Component {
-
-    constructor(props) {
-        super(props);
-        this.renderStats.bind(this);
-        console.log(petStat.hunger);
-    }
-
-    renderStats() {
-        let statsBlocks = [];
-        for (const stat in petStat) {
-            if (typeof petStat[stat] === 'function') continue;
-            statsBlocks.push(
-                <PetContext.Provider key={stat} value={petStat[stat]['level']}>
-                    <SingleStat name={stat}/>
-                </PetContext.Provider>
-            );
+    function renderStats() {
+        let stats = [];
+        for (const key in state) {
+            stats.push(<SingleStat key={key} name={key} value={state[key]['level']}/>);
         }
-        return statsBlocks;
+        return stats;
     }
-
-    render() {
-        return (
-            <div className={statsBlockStyles.generalWrapper}>
-                {this.renderStats()}
-            </div>
-        )
-    }
+    
+    return(
+        <div className={statsBlockStyles.generalWrapper}>
+            {renderStats()}
+        </div>
+    ); 
 }
 
 export default StatsBlock;

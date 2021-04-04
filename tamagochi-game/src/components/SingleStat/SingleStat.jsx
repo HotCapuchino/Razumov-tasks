@@ -1,29 +1,18 @@
-import React, { Component } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import statStyle from './SingleStat.module.scss';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import ComponentWithContext from '../HOC/HOC';
+import { petStat } from '../../store/state';
+import reducer from '../../store/reducer';
 
-class SingleStat extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: props.name,
-            stat: props.value,
-            className: props.className
-        };
-    }
-
-    render() {
-        console.log('single stat has been just rerendered!');
-        return (
-            <div className={statStyle.statWrapper}>
-                <div className={statStyle.statWrapper__name}>{this.state.name}:</div>
-                <ProgressBar min='0' max='100' now={this.state.stat} label={`${this.state.stat}%`} 
-                    className={`${statStyle.statWrapper__progressBar} ${this.state.className}`}/>
-            </div>
-        )
-    }
+function SingleStat(props) {
+    const {name, value} = props;
+    
+    return(
+        <div className={statStyle.statWrapper}>
+            <div className={statStyle.statWrapper__name}>{name}:</div>
+            <ProgressBar min='0' max='100' now={value} label={`${value}%`} className={`${statStyle.statWrapper__progressBar} ${'damn'}`}/>
+        </div>
+    );
 }
 
-export default ComponentWithContext(SingleStat);
+export default SingleStat;

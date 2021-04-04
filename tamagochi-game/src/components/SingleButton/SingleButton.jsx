@@ -1,62 +1,53 @@
-import React, { Component } from 'react';
-import ComponentWithContext from '../HOC/HOC';
+import React, { useReducer, useState } from 'react';
 import singleButtonStyles from './SingleButton.module.scss';
+import { petStat } from '../../store/state';
+import reducer from '../../store/reducer';
 
-class SingleButton extends Component {
+function SingleButton(props) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: props.name,
-            dropdownOptions: props.value.options,
-            buttonFunctions: props.value.buttonFunctions,
-            className: props.className,
-            dropdownMenuClass: false
-        }
-        this.renderDropownList.bind(this);
-        this.handleAction.bind(this)
+    let {name, options} = props;
+    const [dropdownClass, setDropdownClass] = useState(false);
+    const [state, dispatch] = useReducer(reducer, petStat);
+
+    function handleOpenDropdown() {
+        setDropdownClass(prevState => !prevState);
     }
 
-    handleAction(array) {
-        for (let i = 0; i < array.length; i++) {
-            this.state.buttonFunctions.setProperty(array[i][0], array[i][1]);
+    function handleAction(array) {
+        for (const action of array) {
+            dispatch({
+                type: 'set-property',
+                payload: {
+                    property: action[0],
+                    value: action[1]
+                }
+            });
         }
     }
 
-    renderDropownList() {
+    function renderDropownList() {
         let buttonsList = [];
-        for (const action in this.state.dropdownOptions) {
-            let values_array = Object.entries(this.state.dropdownOptions[action]);
+        for (const option in options) {
+            let values_array = Object.entries(options[option]);
             buttonsList.push(
-                <li key={action}>
-                    <button onClick={() => this.handleAction(values_array)}>
-                        {action}
+                <li key={option}>
+                    <button onClick={() => handleAction(values_array)}>
+                        {option}
                     </button>
                 </li>
-            );
+            )
         }
         return buttonsList;
     }
 
-    handleOpenDropdown() {
-        this.setState(prevState => {
-            return {
-                ...prevState, 
-                dropdownMenuClass: !this.state.dropdownMenuClass,
-            }
-        })
-    }
-
-    render() {
-        return (
-            <div className={singleButtonStyles.buttonWrapper}>
-                <button className={this.state.className} onClick={this.handleOpenDropdown.bind(this)}>{this.state.name}</button>
-                <ul className={this.state.dropdownMenuClass ? singleButtonStyles.actionsList : singleButtonStyles.none}>
-                    {this.renderDropownList()}
-                </ul>
-            </div>
-        )
-    }
+    return(
+        <div className={singleButtonStyles.buttonWrapper}>
+            <button onClick={handleOpenDropdown}>{name}</button>
+            <ul className={dropdownClass ? singleButtonStyles.actionsList : singleButtonStyles.none}>
+                {renderDropownList()}
+            </ul>
+        </div>
+    );
 }
 
-export default ComponentWithContext(SingleButton);
+export default SingleButton;

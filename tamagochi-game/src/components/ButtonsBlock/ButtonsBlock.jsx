@@ -1,46 +1,29 @@
-import React, { Component } from 'react';
-import { PetContext, petStat } from '../../store/state';
+import React, { useReducer } from 'react';
+import { petStat } from '../../store/state';
+import reducer from '../../store/reducer';
 import SingleButton from '../SingleButton/SingleButton';
 import buttonsBlockStyle from './ButtonsBlock.module.scss';
 
-export class ButtonsBlock extends Component {
+function ButtonsBlock() {
 
-    constructor(props) {
-        super(props);
-        this.renderButtons.bind(this);
-    }
+    const [state] = useReducer(reducer, petStat);
 
-    renderButtons() {
+    function renderButtons() {
         let buttonsNames = [];
-        let buttonFunctions = {};
-        for (const stat in petStat) {
-            if (typeof petStat[stat] === 'function') {
-                buttonFunctions[stat] = petStat[stat].bind(petStat);
-            } else {
-                buttonsNames.push(stat);
-            }
+        for (const key in state) {
+            buttonsNames.push(key);
         }
-        return buttonsNames.map((elem, index) => {
-            let button_options = {
-                options: petStat[elem]['options'],
-                buttonFunctions: buttonFunctions
-            }
-            return(
-                <PetContext.Provider key={index} value={button_options}>
-                    <SingleButton name={petStat[elem]['action']}/>
-                </PetContext.Provider>
-            );
+        return buttonsNames.map(elem => {
+            return <SingleButton key={elem} name={state[elem]['action']} options={state[elem]['options']} />
         });
     }
 
-    render() {
-        console.log('i has been just rerendered!');
-        return (
-            <div className={buttonsBlockStyle.generalWrapper}>
-                {this.renderButtons()}
-            </div>
-        )
-    }
+    return (
+        <div className={buttonsBlockStyle.generalWrapper}>
+            {renderButtons()}
+        </div>
+    );
 }
+
 
 export default ButtonsBlock;
