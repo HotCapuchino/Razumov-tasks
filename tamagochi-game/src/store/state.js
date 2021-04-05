@@ -92,7 +92,8 @@ const petStat = {
                 exhaustion: 10
             }
         }
-    }
+    },
+    coefficient: 1
 }
 
 export {petStat};

@@ -7,11 +7,19 @@ import statsBlockStyles from './StatsBlock.module.scss';
 function StatsBlock() {
     
     const [state, dispatch] = useReducer(reducer, petStat);
-    console.log(state.health.level)
+    useEffect(() => {
+        let intervalID = setInterval(() => {
+            // console.log('inside stats block: ', state.health.level);
+        }, 5000);
+        return () => {
+            clearInterval(intervalID);
+        }
+    }, [])
 
     function renderStats() {
         let stats = [];
         for (const key in state) {
+            if (key === 'coefficient') continue;
             stats.push(<SingleStat key={key} name={key} value={state[key]['level']}/>);
         }
         return stats;

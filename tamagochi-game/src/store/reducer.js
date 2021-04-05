@@ -1,5 +1,5 @@
 const reducer = (state, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case 'set-property': {
             let objectToBeChange = state[action.payload.property];
             objectToBeChange.level += action.payload.value;
@@ -12,11 +12,21 @@ const reducer = (state, action) => {
         }
         case 'time-passes': {
             let newState = state;
+            let state_coeff = 1;
+            for (const key in state) {
+                if (key === 'coefficient') continue;
+                console.log(key, state[key]['level']);
+                if (state[key]['level'] === 100) {
+                    state_coeff++;
+                }
+            }
+            newState.coefficient = state_coeff;
             for (const stat in newState) {
+                if (stat === 'coefficient') continue;   
                 if (stat === 'health') {
-                    newState[stat]['level'] -= 1;
+                    newState[stat]['level'] -= 1 * state_coeff;
                 } else {
-                    newState[stat]['level'] += 2;
+                    newState[stat]['level'] = newState[stat]['level'] + 2 > 100 ? 100 : newState[stat]['level'] + 2;
                 }
             }
             return newState;
