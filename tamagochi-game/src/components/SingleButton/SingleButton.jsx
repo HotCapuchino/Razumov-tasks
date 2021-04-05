@@ -23,6 +23,7 @@ function SingleButton(props) {
                 }
             });
         }
+        // console.log(state);
     }
 
     function renderDropownList() {

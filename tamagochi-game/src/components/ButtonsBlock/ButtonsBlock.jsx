@@ -6,7 +6,7 @@ import buttonsBlockStyle from './ButtonsBlock.module.scss';
 
 function ButtonsBlock() {
 
-    const [state] = useReducer(reducer, petStat);
+    const [state, dispatch] = useReducer(reducer, petStat);
 
     function renderButtons() {
         let buttonsNames = [];

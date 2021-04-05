@@ -6,10 +6,8 @@ import statsBlockStyles from './StatsBlock.module.scss';
 
 function StatsBlock() {
     
-    const [state] = useReducer(reducer, petStat);
-    useEffect(() => {
-        console.log(state);
-    }, [state])
+    const [state, dispatch] = useReducer(reducer, petStat);
+    console.log(state.health.level)
 
     function renderStats() {
         let stats = [];

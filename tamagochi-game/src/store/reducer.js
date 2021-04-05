@@ -10,6 +10,17 @@ const reducer = (state, action) => {
                 [action.payload.property]: objectToBeChange
             }
         }
+        case 'time-passes': {
+            let newState = state;
+            for (const stat in newState) {
+                if (stat === 'health') {
+                    newState[stat]['level'] -= 1;
+                } else {
+                    newState[stat]['level'] += 2;
+                }
+            }
+            return newState;
+        }
         default: return state;
     }
 }

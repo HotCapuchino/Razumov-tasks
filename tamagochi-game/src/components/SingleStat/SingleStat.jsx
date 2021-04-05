@@ -1,8 +1,6 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React from 'react';
 import statStyle from './SingleStat.module.scss';
 import ProgressBar from 'react-bootstrap/ProgressBar';
-import { petStat } from '../../store/state';
-import reducer from '../../store/reducer';
 
 function SingleStat(props) {
     const {name, value} = props;
