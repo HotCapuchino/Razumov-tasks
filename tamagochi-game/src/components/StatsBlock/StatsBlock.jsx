@@ -9,7 +9,7 @@ function StatsBlock() {
     const [state, dispatch] = useReducer(reducer, petStat);
     useEffect(() => {
         let intervalID = setInterval(() => {
-            // console.log('inside stats block: ', state.health.level);
+            console.log('inside stats block: ', state.health.level);
         }, 5000);
         return () => {
             clearInterval(intervalID);

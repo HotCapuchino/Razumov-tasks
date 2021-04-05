@@ -11,7 +11,7 @@ function App() {
   useEffect(() => {
     let intervalID = setInterval(() => {
       dispatch({type: 'time-passes'});
-      console.log(state);
+      console.log('inside main component: ', state.health.level);
       if (state.health.level === 0) {
         clearInterval(intervalID);
         alert('game is over!');

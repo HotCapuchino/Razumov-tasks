@@ -15,7 +15,7 @@ const reducer = (state, action) => {
             let state_coeff = 1;
             for (const key in state) {
                 if (key === 'coefficient') continue;
-                console.log(key, state[key]['level']);
+                // console.log(key, state[key]['level']);
                 if (state[key]['level'] === 100) {
                     state_coeff++;
                 }

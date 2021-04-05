@@ -9,7 +9,7 @@ function ButtonsBlock() {
     const [state, dispatch] = useReducer(reducer, petStat);
     useEffect(() => {
         let intervalID = setInterval(() => {
-            // console.log('inside buttons block: ', state.health.level);
+            console.log('inside buttons block: ', state.health.level);
         }, 5000);
         return () => {
             clearInterval(intervalID);
