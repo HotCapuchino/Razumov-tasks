@@ -1,6 +1,7 @@
-import './App.css';
+import './App.scss';
 import StatsBlock from './components/StatsBlock/StatsBlock';
 import ButtonsBlock from './components/ButtonsBlock/ButtonsBlock';
+import Logger from './components/Logger/Logger';
 import reducer from './store/reducer';
 import {petStat} from './store/state';
 import { useReducer, useEffect } from 'react';
@@ -11,23 +12,23 @@ function App() {
   useEffect(() => {
     let intervalID = setInterval(() => {
       dispatch({type: 'time-passes'});
-      console.log('inside main component: ', state.health.level);
-      if (state.health.level === 0) {
+      if (state.health.level <= 0) {
         clearInterval(intervalID);
-        alert('game is over!');
       }
-    }, 5000);
+    }, 2000);
     return () => {
       clearInterval(intervalID);
     }
-  }, [state.health.level])
+  }, []);
 
   return (
     <div className="App">
+      <h1>Mini Game</h1>
       <div className="App__commandsAndControls">
         <StatsBlock />
         <ButtonsBlock />
       </div>
+      <Logger />
     </div>
   );
 }

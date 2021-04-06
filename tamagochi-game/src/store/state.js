@@ -50,7 +50,7 @@ const petStat = {
         }
     },
     hunger: {
-        level: 20,
+        level: 0,
         action: 'eat', 
         options: {
             apple: {
@@ -76,7 +76,7 @@ const petStat = {
         }
     },
     exhaustion: {
-        level: 20,
+        level: 0,
         action: 'work',
         options: {
             coding: {

@@ -1,0 +1,27 @@
+@import './styles/mixins/media.scss';
+@import './styles/common/reset.scss';
+
+.App {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+h1 {
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 50px;
+
+}
+.App__commandsAndControls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 50px;
+
+  @include _max768 {
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+  }
+}

@@ -6,15 +6,7 @@ import statsBlockStyles from './StatsBlock.module.scss';
 
 function StatsBlock() {
     
-    const [state, dispatch] = useReducer(reducer, petStat);
-    useEffect(() => {
-        let intervalID = setInterval(() => {
-            console.log('inside stats block: ', state.health.level);
-        }, 5000);
-        return () => {
-            clearInterval(intervalID);
-        }
-    }, [])
+    const [state, _] = useReducer(reducer, petStat);
 
     function renderStats() {
         let stats = [];

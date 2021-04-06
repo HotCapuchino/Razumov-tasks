@@ -1,29 +1,29 @@
 import React from 'react';
-import { PetContext } from '../../store/state';
 import generalStyles  from '../../styles/common/general.scss';
 
-const ComponentWithContext = (Component) => {
+const ComponentWithClass = (Component) => {
     return (props) => {
         let class_name = null;
         if (props.name) {
             switch(props.name) {
-                case 'health': class_name = generalStyles.red;
+                case 'health':
+                case 'relax': class_name = 'red';
                 break;
-                case 'thirst': class_name = generalStyles.blue;
+                case 'thirst':
+                case 'drink': class_name = 'blue';
                 break;
-                case 'hunger': class_name = generalStyles.gold;
+                case 'hunger': 
+                case 'eat': class_name = 'gold';
                 break;
-                case 'exhaustion': class_name = generalStyles.grey;
+                case 'exhaustion':
+                case 'work': class_name = 'grey';
                 break;
                 default: break;
             }
         }
-        return (
-            <PetContext.Consumer>
-                {value => <Component {...props} value={value} className={class_name} />}
-            </PetContext.Consumer>
-        );
+        // console.log(class_name);
+        return (<Component {...props} className={class_name} />);
     };
 }
 
-export default ComponentWithContext;
+export default ComponentWithClass;
