@@ -10,7 +10,9 @@
                 logger({
                     property: String(action.payload.action).toLowerCase(),
                     healthLevel: state.health.level,
-                    option: action.payload.option
+                    option: action.payload.option, 
+                    changed: action.payload.property,
+                    changedValue: action.payload.value
                 });
                 return {
                     ...state,
@@ -37,7 +39,9 @@
                 }
                 logger({
                     property: 'time',
-                    healthLevel: newState.health.level
+                    healthLevel: newState.health.level,
+                    changed: 'health',
+                    changedValue: -1 * state_coeff
                 });
                 return { ...newState };
             }
@@ -58,14 +62,15 @@
                 break;
             case 'work': action_description = `You have performed following work: ${action.option}`;
                 break;
-            case 'time': action_description = `Time passes..`;
+            case 'time': action_description = `Time passed..`;
                 break;
             default: break;
         }
         log.push({
             actionDescription: action_description,
             healthLevel: action.healthLevel,
-            className: action.property
+            className: action.property,
+            changedProperty: `It affected ${action.changed}, and ${action.changedValue > 0 ? 'increased' : 'decreased'} ${action.changed} level to ${Math.abs(action.changedValue)}`
         });
     }
 

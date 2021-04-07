@@ -13,7 +13,7 @@ function SingleButton(props) {
         setDropdownClass(prevState => !prevState);
     }
 
-    function handleAction(array, option) {
+    function handleAction(array, option) {;
         for (const action of array) {
             dispatch({
                 type: 'set-property',
