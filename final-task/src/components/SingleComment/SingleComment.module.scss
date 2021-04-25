@@ -1,0 +1,8 @@
+@import '../../styles/general/colours.scss';
+@import '../../styles/general/layout.scss';
+@import '../../styles/general/reset.css';
+
+
+.commentWrapper {
+    @extend .flex-container-row;
+}

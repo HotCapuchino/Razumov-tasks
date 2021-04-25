@@ -1,0 +1,29 @@
+@import '../../styles/general/colours.scss';
+@import '../../styles/general/layout.scss';
+@import '../../styles/general/reset.css';
+
+
+.mainWrapper {
+    @extend .flex-container-column;
+    background-color: $main-background;
+    position: relative;
+    margin: auto;
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    box-shadow: 0px 4px 40px #8CA4D8;
+    border-radius: 30px;
+    padding: 3% 3% 3% 5%;
+}
+
+.contentBlock {
+    @extend .flex-container-row;
+    height: 90%;
+}
+
+.toDoBlock {
+    @extend .flex-container-column;
+    height: 100%;
+    width: 75%;
+    justify-content: space-between;
+}

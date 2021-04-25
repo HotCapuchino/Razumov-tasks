@@ -1,0 +1,84 @@
+@import '../../styles/general/colours.scss';
+@import '../../styles/general/layout.scss';
+@import '../../styles/general/reset.css';
+
+.toDoWrapper {
+    @extend .flex-container-row;
+    justify-content: space-between;
+    border-bottom: .5px solid $grey;
+    width: 100%;
+    align-items: center;
+
+    &__description {
+
+    }
+
+    &__status {
+
+        text-align: center;
+        border-radius: 8px;
+
+        &_pending {
+            background-color: $pending-background;
+            color: $pending-color;
+        }   
+
+        &_inProgress {
+            background-color: $in_progress-background;
+            color: $in_progress-color;
+        }
+
+        &_completed {
+            background-color: $completed-background;
+            color: $completed-color;
+        }
+
+        &_cancelled {
+            background-color: $cancelled-background;
+            color: $cancelled-color;
+        }
+    }
+
+    &__importance {
+        @extend .flex-container-row;
+
+        &_minor::before {
+            content: "\2022";
+            color: $minor;
+            margin-right: 5px;
+        }
+
+        &_normal::before {
+            content: "\2022";
+            color: $normal;
+            margin-right: 5px;
+        }
+
+        &_critical::before {
+            content: "\2022";
+            color: $critical;
+            margin-right: 5px;
+        }
+    }
+}
+
+.contributorsList {
+    @extend .flex-container-row;
+}
+
+.contributor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    margin-right: -10px;
+    border: 2px solid red;
+}
+
+.dropdownActions {
+    height: 20px;
+    width: 20px;
+    border-radius: 100%;
+}

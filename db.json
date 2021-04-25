@@ -1,0 +1,39 @@
+{
+    "tasks": [
+        {
+            "id": 1,
+            "description": "Have to wash my pants!",
+            "status": "Pending",
+            "importance": "Critical",
+            "contributers": ["Andrew", "Sasha"],
+            "completed": false
+        }, 
+        {
+            "id": 2,
+            "description": "Walk with a dog!",
+            "status": "Completed",
+            "importance": "Minor",
+            "contributers": ["Sasha"],
+            "completed": true
+        }
+    ],
+    "comments": [
+        {
+            "todo_id": 1,
+            "text": "I can't stand this smell no more!"
+        }, 
+        {
+            "todo_id": 1,
+            "text": "I think this shit is already radioactive!"
+        }, 
+        {
+            "todo_id": 2,
+            "text": "Snoop Doggy Doggy!"
+        }, 
+        {
+            "todo_id": 1,
+            "text": "Damn, bro you're killing it!"
+        }
+    ], 
+    "users": []
+}

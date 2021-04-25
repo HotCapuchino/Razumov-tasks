@@ -1,0 +1,60 @@
+@import '../../styles/general/colours.scss';
+@import '../../styles/general/layout.scss';
+@import '../../styles/general/reset.css';
+
+
+.toDoListWrapper {
+    @extend .flex-container-column;
+    padding: 10px 0;
+}
+.titleBlock {
+    @extend .flex-container-row;
+    align-items: center;
+
+    &__title {
+        font-size: 22px;
+        text-align: left;
+        margin: 0;
+    }
+
+    &__toggleCompleted {
+        text-align: left;
+        background-color: $inactive-background;
+        color: $inactive-color;
+        border-radius: 8px;
+        margin-left: 10px;
+    }
+}
+.hold {
+    height: 50%;
+}
+.completed {
+    height: 35%;
+}
+.inactive {
+    opacity: 0.5;
+}
+.ToDosList {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    padding-right: 5px;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+// ::-webkit-scrollbar-track {
+//     background: $grey; 
+// }
+::-webkit-scrollbar-thumb {
+    background: $grey; 
+}
+.toDoItem {
+    @extend .flex-container-row;
+}
+.toDoItem::before {
+    content: "\2022";
+    font-size: 20px;
+    color: #f3477ab3;
+    display: inline;
+    margin-right: 10px;
+}

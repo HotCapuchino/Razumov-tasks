@@ -1,0 +1,17 @@
+@import '../../styles/general/colours.scss';
+@import '../../styles/general/layout.scss';
+@import '../../styles/general/reset.css';
+
+.navBarWrapper {
+    @extend .flex-container-row;
+    height: 10%;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.userBlock {
+    @extend .flex-container-row;
+    justify-content: flex-end;
+    width: 40%;
+}
