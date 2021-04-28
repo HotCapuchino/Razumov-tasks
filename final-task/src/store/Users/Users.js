@@ -4,7 +4,7 @@ import {api} from '../../utils/API';
 
 class Users {
 
-    users = [];
+    users = {};
 
     constructor() {
         makeAutoObservable(this);
@@ -14,7 +14,9 @@ class Users {
     fetchUsers() {
         this.api.fetchUsers()
         .then(action(data => {
-            this.users = data;
+            for (const user of data) {
+                this.users[user.id] = user.name;
+            }
         }))
         .catch(err => console.log(err));
     }

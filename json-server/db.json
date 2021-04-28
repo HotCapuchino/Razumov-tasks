@@ -1,44 +1,40 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "description": "Have to wash my pants!",
-      "status": "Pending",
-      "importance": "Critical",
+      "id": 1619533834181,
+      "description": "Buy Milk",
+      "status": "inprogress",
+      "importance": "minor",
       "completed": false
     },
     {
-      "id": 2,
-      "description": "Walk with a dog!",
-      "status": "Completed",
-      "importance": "Minor",
-      "completed": true
+      "id": 1619533860523,
+      "description": "Buy socks",
+      "status": "pending",
+      "importance": "critical",
+      "completed": false
     }
   ],
   "comments": [
     {
-      "id": 1,
+      "id": 1619533834181,
       "comments_list": [
         {
-          "user_id": 5,
-          "text": "Yes, I cant stand this smell no more!"
-        },
-        {
           "user_id": 3,
-          "text": "I wish you would have done it earlier!"
-        },
-        {
-          "user_id": 6,
-          "text": "Damn, I think it's toxic already!"
+          "text": "Test 1"
         }
       ]
     },
     {
-      "id": 2,
+      "id": 1619533860523,
       "comments_list": [
         {
+          "user_id": 5,
+          "text": "Test 2"
+        },
+        {
           "user_id": 1,
-          "text": "Snoop Doggy Doggy!"
+          "text": "I really need those socks plz"
         }
       ]
     }
@@ -55,8 +51,12 @@
   ],
   "contributors": [
     {
-      "id": 1,
+      "id": 1619533834181,
       "contributors_list": [
+        {
+          "user_id": 2,
+          "role": "executor"
+        },
         {
           "user_id": 1,
           "role": "author"
@@ -64,8 +64,12 @@
       ]
     },
     {
-      "id": 2,
+      "id": 1619533860523,
       "contributors_list": [
+        {
+          "user_id": 1,
+          "role": "executor"
+        },
         {
           "user_id": 2,
           "role": "author"

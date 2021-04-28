@@ -1,4 +1,4 @@
-import {action, makeAutoObservable} from 'mobx';
+import {makeAutoObservable} from 'mobx';
 import {api} from '../../utils/API';
 
 class Contributors {

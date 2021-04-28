@@ -10,7 +10,11 @@
     align-items: center;
 
     &__description {
+        cursor: pointer;
+    }
 
+    &__description:hover {
+        color: $pink;
     }
 
     &__status {
@@ -23,7 +27,7 @@
             color: $pending-color;
         }   
 
-        &_inProgress {
+        &_inprogress {
             background-color: $in_progress-background;
             color: $in_progress-color;
         }
@@ -81,4 +85,5 @@
     height: 20px;
     width: 20px;
     border-radius: 100%;
+    line-height: 20px;
 }

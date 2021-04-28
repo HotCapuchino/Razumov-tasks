@@ -1,0 +1,3 @@
+{
+    "/tasks/:id/:resource": "/tasks/:id/:resource"
+}

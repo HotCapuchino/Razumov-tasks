@@ -3,6 +3,11 @@
 @import '../../styles/general/reset.css';
 
 
+.loadingWrapper {
+    @extend .flex-container-row;
+    align-items: center;
+    justify-content: center;
+}
 .toDoListWrapper {
     @extend .flex-container-column;
     padding: 10px 0;

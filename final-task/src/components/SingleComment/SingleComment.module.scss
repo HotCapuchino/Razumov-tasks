@@ -5,4 +5,43 @@
 
 .commentWrapper {
     @extend .flex-container-row;
+    padding-left: 10px;
+
+    &__image {
+        width: 25%;
+        border-radius: 100%
+    }
+}
+
+.commentBlock {
+    @extend .flex-container-column;
+    width: 75%;
+
+    &__toDoName {
+        font-size: 10px;
+        text-align: left;
+        margin-top: 5px;
+
+        b {
+            display: inline-block;
+            color: $normal;
+        }
+    }
+
+    &__text {   
+        background-color: $comment-background;
+        padding: 20px 10px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+}
+
+.commentInfo {
+    @extend .flex-container-row;
+    flex-wrap: wrap;
+
+    &__name {
+        margin-right: 20px;
+        font-weight: 700;
+    }
 }

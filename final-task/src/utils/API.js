@@ -9,6 +9,7 @@ export class API {
         });
     }
 
+    // toDos actions
     async fetchToDos() {
         let response = await this.request.get('/tasks');
         if (response.status === 200) {
@@ -19,7 +20,6 @@ export class API {
     }
 
     async createToDo(description, importance) {
-        console.log('create ToDo was invoked!');
         let new_toDo = {
             id: Date.now(),
             description: description,
@@ -29,7 +29,6 @@ export class API {
         };
         let response = await this.request.post(`/tasks`, new_toDo);
         if (response.status < 300) {
-            console.log(response.status);
             return new_toDo;
         } else {
             throw new Error('Unable to post data!');
@@ -43,7 +42,7 @@ export class API {
             status: status,
             importance: importance
         });
-        if (response.status !== 200) {
+        if (response.status > 300) {
             throw new Error('Unable to update data!');
         } else {
             return true;
@@ -64,6 +63,7 @@ export class API {
     async deleteToDo(toDo_id) {
         Promise.all([
             this.request.delete(`/tasks/${toDo_id}`),
+            this.request.delete(`/contributors/${toDo_id}`),
             this.request.delete(`/comments/${toDo_id}`)
         ]).then(() => true)
         .catch(err => {
@@ -72,30 +72,56 @@ export class API {
         });
     }
 
+    // contributors actions
     async fetchContributors(toDo_id) {
         let response = await this.request.get(`/contributors/${toDo_id}`);
         if (response.status === 200) {
             return response.data;
+            // let contributors_list = [];
+            // for (const contributor of response.data.contributors_list) {
+            //     console.log(contributor);
+            //     if (contributor.role === 'executor') {
+            //         contributors_list.unshift(contributor);
+            //         continue;
+            //     }
+            //     if (contributor.role === 'author') {
+            //         if (contributors_list.length > 1) {
+            //             contributors_list[1] = contributor;
+            //         } else {
+            //             contributors_list.push(contributor);
+            //         }
+            //         continue;
+            //     }
+            //     contributors_list.push(contributor);
+            // }
+            // return contributors_list;
         } else {
             throw new Error('Unable to fetch data!');
         }
     }
 
     async addContributor(toDo_id, user_id, role) {
-        let response = await this.request.get(`/contributors/${toDo_id}`);
-        if (response.status !== 200) {
-            throw new Error('Unable to fetch data!');
-        }
-        let contributors_list = response.data.contributors_list;
-        contributors_list.push({user_id: user_id, role: role});
-        response = await this.request.patch(`/contributors/${toDo_id}`, {contributors_list: contributors_list});
-        if (response.status !== 200) {
-            throw new Error('Unable to update data!');
-        } else {
-            return true;
+        try {
+            let response = await this.request.get(`/contributors/${toDo_id}`);
+            let contributors_list = response.data.contributors_list;
+            contributors_list.push({user_id: user_id, role: role});
+            response = await this.request.patch(`/contributors/${toDo_id}`, {contributors_list: contributors_list});
+        } catch(err) {
+            let contributors_list = [];
+            contributors_list.push({user_id: user_id, role: role});
+            let response = await this.request.post('/contributors', {
+                id: toDo_id,
+                contributors_list: contributors_list
+            });
+            if (response.status > 300) {
+                console.log('Unable to post data!');
+            } else {
+                return true;
+            }
         }
     }
 
+    // comments Actions
     async fetchComments(toDo_id) {
         let response = await this.request.get(`/comments/${toDo_id}`);
         if (response.status === 200) {
@@ -106,18 +132,26 @@ export class API {
     }
 
     async addComment(toDo_id, user_id, text) {
-        let response = await this.request.get(`/comments/${toDo_id}`);
-        if (response.status !== 200) {
-            throw new Error('Unable to fetch data!');
+        let new_comment = null;
+        try {
+            let response = await this.request.get(`/comments/${toDo_id}`);
+            let comments = response.data.comments_list;
+            new_comment = {user_id: user_id, text: text};
+            comments.push(new_comment);
+            response = await this.request.patch(`/comments/${toDo_id}`, {comments_list: comments});
+        } catch(err) {
+            let comments = [];
+            new_comment = {user_id: user_id, text: text};
+            comments.push(new_comment);
+            let response = await this.request.post(`/comments`, {
+                id: toDo_id,
+                comments_list: comments
+            });
+            if (response.status > 300) {
+                throw new Error('Unable to update data!');
+            }
         }
-        let comments = response.data.comments_list;
-        comments.push({user_id: user_id, text: text});
-        response = await this.request.patch(`/comments/${toDo_id}`, {comments_list: comments});
-        if (response.status !== 200) {
-            throw new Error('Unable to update data!');
-        } else {
-            return true;
-        }
+        return new_comment;
     }
 
     async deleteComment(toDo_id, user_id) {
@@ -142,9 +176,9 @@ export class API {
 
     }
 
+    // users Actions
     async fetchUsers() {
         let response = await this.request.get('/users');
-        console.log(response.data);
         if (response.status === 200) {
             return response.data;
         } else {

@@ -15,3 +15,26 @@
     justify-content: flex-end;
     width: 40%;
 }
+
+.searchBarWrapper {
+    width: 60%;
+    text-align: left;
+    padding-right: 30px;
+
+    &__input {
+        text-align: left;
+        width: 100%;
+    }
+
+    &__input:focus {
+        border-bottom: 2px solid $grey;
+    }
+
+
+    &__input::before {
+        content: url('../../assets/icons/search_icon.svg');
+        margin-right: 10px;
+        width: 10px;
+        height: 10px;
+    }
+}

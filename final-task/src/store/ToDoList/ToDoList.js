@@ -6,6 +6,8 @@ class ToDoList {
 
     toDos = [];
     isLoading = true;
+    searched = '';
+    chosenToDo = null;
 
     constructor() {
         makeAutoObservable(this);
@@ -13,24 +15,34 @@ class ToDoList {
     }
 
     fetchToDos() {
+        console.log(this.searched);
         this.api.fetchToDos()
         .then(action(data => {
             for (const toDo of data) {
                 this.toDos.push(new ToDoItem(this, toDo));
             }
+            this.setChosen(this.unfinishedToDos[0]);
+            setTimeout(() => {
+                this.isLoading = false;
+            }, 500);
         }))
         .catch(err => console.log(err));
     }
 
-    createToDo(description, importance) {
+    createToDo(description, importance, user_id, role) {
         this.api.createToDo(description, importance)
-        .then(() => {
-            this.toDos.push(new ToDoItem(this, {
+        .then((toDo) => {
+            let {id, description, status, importance, completed} = toDo;
+            this.api.addContributor(id, user_id, role);
+            let createdToDo = new ToDoItem(this, {
+                id,
                 description, 
-                status:'pending', 
+                status, 
                 importance, 
-                completed: false
-            }));
+                completed
+            });
+            this.toDos.push(createdToDo);
+            createdToDo.fetchContributors();
         })
         .catch(err => console.log(err));
     }
@@ -62,6 +74,14 @@ class ToDoList {
         .catch(err => console.log(err));
     }
 
+    setSearched(value) {
+        this.searched = value;
+    }
+
+    setChosen(chosen) {
+        this.chosenToDo = chosen;
+    }
+
     get completedToDos() {
         let completed = [];
         this.toDos.forEach(toDo => {
@@ -80,6 +100,14 @@ class ToDoList {
             }
         });
         return unfinished;
+    }
+
+    get searchedToDos() {
+        return this.unfinishedToDos.filter((toDo) => {
+            if (toDo.description.toLowerCase().indexOf(this.searched) >= 0) {
+                return toDo;
+            }
+        })
     }
 
 }
