@@ -1,0 +1,96 @@
+@import '../../styles/general/colours.scss';
+@import '../../styles/general/layout.scss';
+@import '../../styles/general/reset.css';
+@import '../../styles/mixins/fonts.scss';
+
+
+.modalTitle {
+    @include font-options('Poppins', 24px, 700);
+    color: $purple;
+}
+
+.form {
+    @extend .flex-container-column;
+}
+
+.descriptionBlock {
+    @extend .flex-container-column;
+    
+    &__title {
+        @include font-options('Poppins', 20px, 700);
+    }
+}
+
+.textarea {
+    resize: none;
+    background-color: rgba($comment-background, 0.7);
+    border-radius: 5px;
+    padding: 5px 10px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.select {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid $comment-background;
+    margin-bottom: 15px;
+}
+
+.select:hover {
+    border-bottom: 2px solid $grey;
+}
+
+.label {
+    @include font-options('Poppins', 16px, 700);
+    display: block;
+    margin: 0;
+}
+
+.buttonsBlock {
+
+    button {
+        @include font-options('Poppins', 14px, 700); 
+        padding: 5px 12px;
+        border-radius: 5px;
+        border: 2px solid transparent;
+    }
+
+    &__accept {
+        margin-right: 10px;
+        background-color: $purple;
+        color: $comment-background;
+    }
+
+    &__accept:hover {
+        background-color: transparent;
+        color: $purple;
+        border-color: $purple;
+    }
+
+    &__close {
+        background-color: $inactive-color;
+        color: $comment-background;
+    }
+
+    &__close:hover {
+        background-color: transparent;
+        color: $inactive-color;
+        border-color: $inactive-color;
+    }
+}
+
+.errorMessage {
+    color: $inactive-color;
+}
+
+.toDoInfo {
+    @extend .flex-container-row;
+    margin-bottom: 15px;
+
+    &__text {
+        font-weight: bold;
+        color: $normal;
+    }
+}

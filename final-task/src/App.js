@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Main from './components/Main/Main';
-// import {useAPI} from './customHooks/useAPI';
 import {users} from './store/Users/Users';
+
+let userNumber = React.createContext(Math.ceil(Math.random() * 12));
 
 function App() {
   useEffect(() => {
     users.fetchUsers();
-    // console.log(Math.round(Math.random() * 5));
   }, []);
 
   return (
@@ -18,3 +18,4 @@ function App() {
 }
 
 export default App;
+export {userNumber};

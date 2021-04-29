@@ -5,13 +5,15 @@ import 'antd/dist/antd.css';
 import { observer } from 'mobx-react';
 import { users } from '../../store/Users/Users';
 import Modal from '../ModalHOC/Modal';
+import {useToggle, calcIndex} from '../../customHooks/useToggle';
 
 const ToDo = observer(({ toDo }) => {
 
-    const testColor = ['red', 'green', 'blue', 'yellow', 'purple'];
     const available_statuses = ['Pending', 'In Progress', 'Completed', 'Cancelled'];
     const [editModalVisible, setEditModalVisible] = useState(false);
     const [commentModalVisible, setCommentModalVisible] = useState(false);
+    const needToggle = useToggle();
+    // console.log(toDo);
 
     function renderContributors() {
         let contributors_list = [];
@@ -19,15 +21,17 @@ const ToDo = observer(({ toDo }) => {
         let end = contributors_length > 5 ? 4 : contributors_length;
         for (let i = 0; i < end; i++) {
             contributors_list.push(
-                <li key={toDo.contributors[i].user_id + i} className={toDoStyle.contributor} style={{ backgroundColor: testColor[i] }}>
-                    {users.users[toDo.contributors[i].user_id].charAt(0).toUpperCase()}
+                <li key={toDo.contributors[i].user_id + i} className={toDoStyle.contributor}>
+                    <img src={users.users[toDo.contributors[i].user_id].photo} alt="img here" className={toDoStyle.contributor__photo}/>
                 </li>
             );
         }
         if (contributors_length > 5) {
             contributors_list.push(
                 <li key='end' className={toDoStyle.contributor}>
-                    {`+${contributors_length - 4}`}
+                    <div className={toDoStyle.contributor__overflow}>
+                        {`+${contributors_length - 4}`}
+                    </div>
                 </li>
             );
         }
@@ -81,18 +85,8 @@ const ToDo = observer(({ toDo }) => {
         }
     }
 
-    function calculateCurrentStatusIndex() {
-        return available_statuses.findIndex(elem => {
-            if (elem.toLowerCase().replace(' ', '') === toDo.status) {
-                return true;
-            }
-        });
-    }
-
     function handleDropdownStatusActions(newStatus, newIndex) {
-        let currentStatusIndex = calculateCurrentStatusIndex();
-        // checking if we have to change toDo completed value
-        if (Math.abs(currentStatusIndex - newIndex) > 1 || currentStatusIndex * newIndex === 2) {
+        if (needToggle(toDo.status, newIndex)) {
             toDo.toggle();
         }
         toDo.edit({
@@ -103,11 +97,11 @@ const ToDo = observer(({ toDo }) => {
     }
 
     function displayStatus() {
-        let currentStatusIndex = calculateCurrentStatusIndex();
-        let extra_class = toDoStyle[`toDoWrapper__status_${(toDo.status).toLowerCase()}`];
+        let currentStatusIndex = calcIndex(toDo.status);
+        let extra_class = toDoStyle[`statusWrapper__status_${(toDo.status).toLowerCase()}`];
         return (
             <Dropdown trigger={['click']} overlay={renderStatusMenu()}>
-                <button className={toDoStyle.toDoWrapper__status + ' ' + extra_class}>
+                <button className={toDoStyle.statusWrapper__status + ' ' + extra_class}>
                     {available_statuses[currentStatusIndex]}
                 </button>
             </Dropdown>
@@ -115,9 +109,9 @@ const ToDo = observer(({ toDo }) => {
     }
 
     function displayImportance() {
-        let extra_class = toDoStyle[`toDoWrapper__importance_${(toDo.importance).toLowerCase()}`];
+        let extra_class = toDoStyle[`importanceWrapper__importance_${(toDo.importance).toLowerCase()}`];
         return (
-            <div className={toDoStyle.toDoWrapper__importance + ' ' + extra_class}>
+            <div className={toDoStyle.importanceWrapper__importance + ' ' + extra_class}>
                 <span>{toDo.importance.charAt(0).toUpperCase() + toDo.importance.slice(1)}</span>
             </div>
         );
@@ -130,8 +124,12 @@ const ToDo = observer(({ toDo }) => {
             <Modal visible={commentModalVisible} setVisibility={setCommentModalVisible} toDo={toDo} type='comment'/>
             <div className={toDoStyle.toDoWrapper}>
                 <div className={toDoStyle.toDoWrapper__description} onClick={() => toDo.displayComments()}>{toDo.description}</div>
-                {displayStatus()}
-                {displayImportance()}
+                <div className={toDoStyle.statusWrapper}>
+                    {displayStatus()}
+                </div>
+                <div className={toDoStyle.importanceWrapper}>
+                    {displayImportance()}
+                </div>
                 <ul className={toDoStyle.contributorsList}>
                     {renderContributors()}
                 </ul>

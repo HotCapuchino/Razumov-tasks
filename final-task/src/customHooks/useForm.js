@@ -15,10 +15,30 @@ const useForm = (formFields) => {
     }
 
     function validateInputs() {
-
+        let validation_passed = true;
+        for (const key in values) {
+            if (!values[key]) {
+                validation_passed = false;
+                setErrors(prevState => ({
+                        ...prevState, 
+                        [key]: 'This field cannot be empty!'
+                    }
+                ));
+            }
+        }
+        return validation_passed;
     }
 
-    return {values, errors, handleInput, validateInputs};
+    function clearValues() {
+        for (const key in values) {
+            setValues(prevState =>({
+                ...prevState,
+                [key]: ''
+            }));
+        }   
+    }
+
+    return {values, errors, handleInput, validateInputs, clearValues};
 
 }
 

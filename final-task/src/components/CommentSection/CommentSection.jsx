@@ -15,7 +15,10 @@ const CommentSection = observer(() => {
                 comms.push(
                     <li key={i}>
                         <SingleComment text={comment.text} 
-                            userName={users.users[comment.user_id]} 
+                            userName={users.users[comment.user_id].name}
+                            photo={users.users[comment.user_id].photo}
+                            toDoOwner={comment.user_id} 
+                            time={comment.time}
                             toDoName={toDoList.chosenToDo.description}/>
                     </li>
                 );

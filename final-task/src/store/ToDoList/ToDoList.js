@@ -15,7 +15,6 @@ class ToDoList {
     }
 
     fetchToDos() {
-        console.log(this.searched);
         this.api.fetchToDos()
         .then(action(data => {
             for (const toDo of data) {
@@ -29,11 +28,16 @@ class ToDoList {
         .catch(err => console.log(err));
     }
 
-    createToDo(description, importance, user_id, role) {
+    createToDo(description, importance, executor_id, author_id) {
         this.api.createToDo(description, importance)
-        .then((toDo) => {
+        .then(action((toDo) => {
             let {id, description, status, importance, completed} = toDo;
-            this.api.addContributor(id, user_id, role);
+            this.api.addContributor(id, author_id, 'author')
+            .then(action(() => {
+                if (author_id !== executor_id) {
+                    this.api.addContributor(id, executor_id, 'executor');
+                }
+            })).catch(err => console.log(err));
             let createdToDo = new ToDoItem(this, {
                 id,
                 description, 
@@ -43,35 +47,34 @@ class ToDoList {
             });
             this.toDos.push(createdToDo);
             createdToDo.fetchContributors();
-        })
+        }))
         .catch(err => console.log(err));
     }
 
     removeToDo(id) {
         api.deleteToDo(id)
-        .then(() => {
+        .then(action(() => {
             this.toDos = this.toDos.filter(function(toDo) {
                 if (toDo.id !== id) return toDo;
             });
-        }).catch(err => console.log(err));
+        })).catch(err => console.log(err));
     }
 
     toggleToDo(id, ref, value) {
         api.toggleToDo(id, !value)
-        .then(() => {
+        .then(action(() => {
             ref.completed = !value;
-        }).catch(err => console.log(err));
+        })).catch(err => console.log(err));
     }
 
     editToDo(id, ref, options) {
         let {description, status, importance} = options;
         api.editToDo(id, options)
-        .then(() => {
+        .then(action(() => {
             ref.description = description;
             ref.status = status;
             ref.importance = importance
-        })
-        .catch(err => console.log(err));
+        })).catch(err => console.log(err));
     }
 
     setSearched(value) {

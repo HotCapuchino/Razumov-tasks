@@ -15,10 +15,21 @@ class Users {
         this.api.fetchUsers()
         .then(action(data => {
             for (const user of data) {
-                this.users[user.id] = user.name;
+                this.users[user.id] = {
+                    name: user.name,
+                    photo: user.picture
+                };
             }
         }))
         .catch(err => console.log(err));
+    }
+
+    fetchNotifications() {
+
+    }
+
+    markAsViewed() {
+        
     }
 }
 

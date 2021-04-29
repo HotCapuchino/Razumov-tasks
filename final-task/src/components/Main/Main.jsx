@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import mainStyles from './Main.module.scss';
 import NavBar from '../NavBar/NavBar';
 import ToDosList from '../ToDosList/ToDosList';
@@ -7,6 +7,8 @@ import CommentSection from '../CommentSection/CommentSection';
 import { useEffect } from 'react';
 import { observer } from 'mobx-react';
 import toDoList from '../../store/ToDoList/ToDoList';
+import {userNumber} from '../../App';
+import {users} from '../../store/Users/Users';
 
 const Main = observer((props) => {
 
@@ -16,7 +18,7 @@ const Main = observer((props) => {
 
     return (
         <div className={mainStyles.mainWrapper}>
-            <NavBar />
+            <NavBar user={users.users[useContext(userNumber)]}/>
             <div className={mainStyles.contentBlock}>
                 <div className={mainStyles.toDoBlock}>
                     <ToDoCreator />

@@ -68,7 +68,7 @@ export class API {
         ]).then(() => true)
         .catch(err => {
             console.log(err);
-            throw new Error('Error occurred while trying to delete toDo!');
+            // throw new Error('Error occurred while trying to delete toDo!');
         });
     }
 
@@ -77,24 +77,6 @@ export class API {
         let response = await this.request.get(`/contributors/${toDo_id}`);
         if (response.status === 200) {
             return response.data;
-            // let contributors_list = [];
-            // for (const contributor of response.data.contributors_list) {
-            //     console.log(contributor);
-            //     if (contributor.role === 'executor') {
-            //         contributors_list.unshift(contributor);
-            //         continue;
-            //     }
-            //     if (contributor.role === 'author') {
-            //         if (contributors_list.length > 1) {
-            //             contributors_list[1] = contributor;
-            //         } else {
-            //             contributors_list.push(contributor);
-            //         }
-            //         continue;
-            //     }
-            //     contributors_list.push(contributor);
-            // }
-            // return contributors_list;
         } else {
             throw new Error('Unable to fetch data!');
         }
@@ -132,16 +114,18 @@ export class API {
     }
 
     async addComment(toDo_id, user_id, text) {
-        let new_comment = null;
+        let new_comment = {
+            user_id,
+            time: Date.now(),
+            text,
+        };
         try {
             let response = await this.request.get(`/comments/${toDo_id}`);
             let comments = response.data.comments_list;
-            new_comment = {user_id: user_id, text: text};
             comments.push(new_comment);
             response = await this.request.patch(`/comments/${toDo_id}`, {comments_list: comments});
         } catch(err) {
             let comments = [];
-            new_comment = {user_id: user_id, text: text};
             comments.push(new_comment);
             let response = await this.request.post(`/comments`, {
                 id: toDo_id,
@@ -170,10 +154,6 @@ export class API {
         } else {
             return true;
         }
-    }
-
-    async editComment() {
-
     }
 
     // users Actions

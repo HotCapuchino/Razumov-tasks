@@ -4,21 +4,28 @@
 
 .toDoWrapper {
     @extend .flex-container-row;
-    justify-content: space-between;
+    // justify-content: space-b etween;
     border-bottom: .5px solid $grey;
     width: 100%;
     align-items: center;
+    padding: 5px 0px;
 
     &__description {
         cursor: pointer;
+        text-align: left;
+        width: 30%;
     }
 
     &__description:hover {
         color: $pink;
     }
+}
+
+.statusWrapper {
+    width: 20%;
 
     &__status {
-
+        @extend .interactive-button;
         text-align: center;
         border-radius: 8px;
 
@@ -42,6 +49,10 @@
             color: $cancelled-color;
         }
     }
+}
+
+.importanceWrapper {
+    width: 20%;
 
     &__importance {
         @extend .flex-container-row;
@@ -63,22 +74,35 @@
             color: $critical;
             margin-right: 5px;
         }
-    }
+    }       
 }
 
 .contributorsList {
     @extend .flex-container-row;
+    width: 30%;
 }
 
 .contributor {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 100%;
-    width: 30px;
-    height: 30px;
     margin-right: -10px;
-    border: 2px solid red;
+    border: 2px solid white;
+
+    &__overflow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background-color: $contributors-overflow;
+        color: $comment-background;
+    }
+
+    &__photo {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+    }
 }
 
 .dropdownActions {

@@ -11,6 +11,9 @@
 
 .commentsList {
 
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+
     &__comment {
         margin-bottom: 20px;
     }

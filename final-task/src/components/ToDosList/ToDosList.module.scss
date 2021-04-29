@@ -23,6 +23,7 @@
     }
 
     &__toggleCompleted {
+        @extend .interactive-button;
         text-align: left;
         background-color: $inactive-background;
         color: $inactive-color;
@@ -57,6 +58,7 @@
     @extend .flex-container-row;
 }
 .toDoItem::before {
+    line-height: 50px;
     content: "\2022";
     font-size: 20px;
     color: #f3477ab3;

@@ -1,4 +1,4 @@
-import {makeAutoObservable} from 'mobx';
+import {makeAutoObservable, action} from 'mobx';
 
 class ToDoItem {
 
@@ -8,6 +8,8 @@ class ToDoItem {
     importance;
     completed;
     contributors = [];
+    author_id;
+    executor_id;
     comments = [];
     store;
 
@@ -23,33 +25,27 @@ class ToDoItem {
 
     fetchContributors() {
         this.store.api.fetchContributors(this.id)
-        .then((data) => {
-            // for (const contributor of data.contributors_list) {
-            //     console.log(contributor);
-            //     if (contributor.role === 'executor') {
-            //         this.contributors.unshift(contributor);
-            //         continue;
-            //     }
-            //     if (contributor.role === 'author') {
-            //         if (this.contributors.length > 1) {
-            //             this.contributors[1] = contributor;
-            //         } else {
-            //             this.contributors.push(contributor);
-            //         }
-            //         continue;
-            //     }
-            //     this.contributors.push(contributor);
-            // }
-            this.contributors = data.contributors_list;
-        })
-        .catch(err => console.log(err));
+        .then(action((data) => {
+            this.contributors = [];
+            for (const contributor of data.contributors_list) {
+                if (contributor.role === 'author') {
+                    this.author_id = contributor.user_id;
+                    this.contributors.unshift(contributor);
+                } else if (contributor.role === 'executor') {
+                    this.executor_id = contributor.user_id;
+                    this.contributors.unshift(contributor);
+                } else {
+                    this.contributors.push(contributor);
+                }
+            }
+        })).catch(err => console.log(err));
     }
 
     fetchComments() {
         this.store.api.fetchComments(this.id)
-        .then((data) => {
+        .then(action((data) => {
             this.comments = data.comments_list;
-        })
+        }))
         .catch(err => console.log(err));
     }
 
@@ -71,20 +67,11 @@ class ToDoItem {
 
     leaveComment(user_id, text) {
         this.store.api.addComment(this.id, user_id, text)
-        .then(data => {
+        .then(action(data => {
             this.comments.push(data);
-        }).catch(err => console.log(err));
+            this.store.api.addContributor(this.id, user_id, 'commentator');
+        })).catch(err => console.log(err));
     }
-
-    get executor() {
-        for (const contributor of this.contributors) {
-            if (contributor.role === 'executor') {
-                return contributor.user_id;
-            }
-        }
-        return null;
-    }
-
 }
 
 export {ToDoItem};

@@ -1,6 +1,7 @@
 @import '../../styles/general/colours.scss';
 @import '../../styles/general/layout.scss';
 @import '../../styles/general/reset.css';
+@import '../../styles/mixins/fonts.scss';
 
 .toDoCreatorWrapper {
     @extend .flex-container-row;
@@ -8,17 +9,23 @@
     align-items: center;
 
     &__title {
-        font-size: 26px;
-        font-weight: bold;
-        font-family: 'Montserrat', sans-serif;
+        @include font-options('Poppins', 36px, 700);
         margin: 0;
         margin-right: 20px;
     }
 
     &__add {
+        @extend .flex-container-row;
+        align-items: center;
         background-color: $purple;
+        color: white;
+        padding: 5px 25px;
         border-radius: 10px;
         border: 2px solid transparent;
+
+        img {
+            margin-right: 5px;
+        }
     }
 
     &__add:hover {
