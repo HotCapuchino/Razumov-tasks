@@ -11,7 +11,7 @@ const CommentSection = observer(() => {
     const [userNum,] = useContext(userContext);
 
     function renderComments() {
-        if (toDoList?.chosenToDo?.comments) {
+        if (toDoList?.chosenToDo?.comments.length) {
             let comms = [];
             for (let i = toDoList.chosenToDo.comments.length - 1; i >= 0; i--) {
                 let comment = toDoList.chosenToDo.comments[i];
@@ -37,6 +37,8 @@ const CommentSection = observer(() => {
     return (
         <div className={commentSectionStyles.commentsBlock}>
             <ul className={commentSectionStyles.commentsList}>
+                {toDoList?.chosenToDo?.comments.length ? null :
+                <li key='nocomms' className={commentSectionStyles.commentsList__noComments}>Seems like there's no comments by now...</li>}
                 {renderComments()}
             </ul>
         </div>

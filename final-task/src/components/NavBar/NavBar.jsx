@@ -11,8 +11,8 @@ const NavBar = observer(({user}) => {
     const [searchedText, setSearchedText] = useState('');
     const [iconVisibility, setIconVisibililty] = useState(true);
     const searchFor = useSearch();
-    const [loggedIn, setLoggedIn] = useContext(loginContext);
-    const [userId, setUserId] = useContext(userContext);
+    const [, setLoggedIn] = useContext(loginContext);
+    const [, setUserId] = useContext(userContext);
 
     function handleTextChanging(event) {
         setSearchedText(event.target.value);
@@ -24,6 +24,11 @@ const NavBar = observer(({user}) => {
         sessionStorage.removeItem('userid');
         setLoggedIn(false);
         setUserId(null);
+    }
+
+    function handleClearNotifications() {
+        console.log('click');
+        user.clearNotifications();
     }
 
     const userInfoMenu = (
@@ -43,7 +48,7 @@ const NavBar = observer(({user}) => {
                     onBlur={() => setIconVisibililty(true)}/>
             </div>
             <div className={navStyles.userBlock}>
-                <Notifications />
+                <Notifications clearNotifications={handleClearNotifications}/>
                 <div className={navStyles.userInfo}>
                     <Dropdown trigger={['click']} overlay={userInfoMenu}>
                         <img src={user?.photo} alt="pic profile" className={navStyles.userInfo__photo}/>

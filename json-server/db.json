@@ -3,9 +3,9 @@
     {
       "id": 1619750215921,
       "description": "Иправить баг с контрибьютерами (перерисовка ТуДу после добавления комментатора и выполняющего)",
-      "status": "pending",
+      "status": "completed",
       "importance": "normal",
-      "completed": false
+      "completed": true
     },
     {
       "id": 1619750357983,
@@ -17,9 +17,9 @@
     {
       "id": 1619750410408,
       "description": "Простой экран регистрации + роутинг, возможность смены юзера",
-      "status": "pending",
+      "status": "completed",
       "importance": "normal",
-      "completed": false
+      "completed": true
     },
     {
       "id": 1619750442695,
@@ -48,6 +48,20 @@
       "status": "completed",
       "importance": "normal",
       "completed": true
+    },
+    {
+      "id": 1619864483134,
+      "description": "New Test Task",
+      "status": "completed",
+      "importance": "minor",
+      "completed": true
+    },
+    {
+      "id": 1619883328960,
+      "description": "Исправить баг с уведомлениями",
+      "status": "pending",
+      "importance": "normal",
+      "completed": false
     }
   ],
   "comments": [
@@ -93,6 +107,16 @@
           "user_id": 2,
           "time": 1619776811026,
           "text": "Это было реально легко"
+        }
+      ]
+    },
+    {
+      "id": 1619864483134,
+      "comments_list": [
+        {
+          "user_id": 6,
+          "time": 1619870384964,
+          "text": "Test Comment"
         }
       ]
     }
@@ -266,31 +290,79 @@
           "role": "executor"
         }
       ]
-    }
-  ],
-  "notifications": [
+    },
     {
-      "id": 1,
-      "notifications_list": [
+      "id": 1619864483134,
+      "contributors_list": [
         {
-          "text": "Pyotr has left comment on your task!"
+          "user_id": 2,
+          "role": "author"
         },
         {
-          "text": "Simon has made you contributor for ... task"
+          "user_id": 8,
+          "role": "executor"
+        },
+        {
+          "user_id": 6,
+          "role": "commentator"
         }
       ]
     },
     {
-      "id": 6,
+      "id": 1619883328960,
+      "contributors_list": [
+        {
+          "user_id": 2,
+          "role": "author"
+        },
+        {
+          "user_id": 7,
+          "role": "executor"
+        }
+      ]
+    }
+  ],
+  "notifications": [
+    {
+      "id": 5,
       "notifications_list": [
         {
+          "text": "Pyotr made you an executor of Test ToDo"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "notifications_list": [
+        {
+          "text": "Pyotr made you an executor of New Test Task ToDo"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "notifications_list": [
+        {
+          "text": "Ioann has completed your task"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "notifications_list": [
+        {
+          "text": "Varfolomey has left comment on your task"
+        },
+        {
           "text": "Pyotr has completed your task"
-        },
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "notifications_list": [
         {
-          "text": "Andrew has resumed your task"
-        },
-        {
-          "text": "Filipp has completed your task"
+          "text": "Pyotr made you an executor of Исправить баг с уведомлениями ToDo"
         }
       ]
     }

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import toDoStyle from './ToDo.module.scss';
 import { Dropdown, Menu } from 'antd';
 import 'antd/dist/antd.css';
@@ -8,13 +8,28 @@ import Modal from '../ModalHOC/Modal';
 import { useToggle, calcIndex } from '../../customHooks/useToggle';
 import {userContext} from '../../customHooks/useLogin';
 
-const ToDo = observer(({ toDo }) => {
+const ToDo = observer(({ toDo, chosen }) => {
 
     const available_statuses = ['Pending', 'In Progress', 'Completed', 'Cancelled'];
     const [editModalVisible, setEditModalVisible] = useState(false);
     const [commentModalVisible, setCommentModalVisible] = useState(false);
     const needToggle = useToggle();
     const [userNum,] = useContext(userContext);
+    const [isCommentsDropdown, setIsCommentsDropdown] = useState(window.innerWidth < 992);
+
+    useEffect(() => {
+        function setCommentSectionType() {
+            if (window.innerWidth < 992) {
+                setIsCommentsDropdown(true);
+            } else {
+                setIsCommentsDropdown(false);
+            }
+        }
+        window.addEventListener('resize', setCommentSectionType);
+        return () => {
+            window.removeEventListener('resize', setCommentModalVisible);
+        }
+    }, [])
 
     function renderContributors() {
         let contributors_list = [];
@@ -22,7 +37,7 @@ const ToDo = observer(({ toDo }) => {
         let end = contributors_length > 5 ? 4 : contributors_length;
         for (let i = 0; i < end; i++) {
             contributors_list.push(
-                <li key={toDo.contributors[i].user_id + i} className={toDoStyle.contributor}>
+                <li key={toDo.contributors[i].user_id} className={toDoStyle.contributor}>
                     <img src={users.users[toDo.contributors[i].user_id].photo} alt="img here" className={toDoStyle.contributor__photo}/>
                 </li>
             );
@@ -41,7 +56,7 @@ const ToDo = observer(({ toDo }) => {
 
     const actionsMenu = (
         <Menu>
-            {userNum === toDo.author_id ? 
+            {Number(userNum) === Number(toDo.author_id) ? 
             <>
                 <Menu.Item key='1' onClick={() => handleDropdownToDoActions('edit')}>Edit</Menu.Item> 
                 <Menu.Item key='2' onClick={() => handleDropdownToDoActions('delete')}>Delete</Menu.Item>
@@ -122,13 +137,29 @@ const ToDo = observer(({ toDo }) => {
         );
     }
 
+    function renderToDoDescription() {
+        if (isCommentsDropdown) {
+            return (
+                <Dropdown trigger={['click']}>
+                    <div className={toDoStyle.toDoWrapper__description + `${chosen ? ` ${toDoStyle.chosenToDo}` : ''}`} 
+                        onClick={() => toDo.displayComments()}>{toDo.description}</div>
+                </Dropdown> 
+            );
+        } else {
+            return (
+                <div className={toDoStyle.toDoWrapper__description + `${chosen ? ` ${toDoStyle.chosenToDo}` : ''}`} 
+                        onClick={() => toDo.displayComments()}>{toDo.description}</div>
+            );
+        }
+    }
+
     // зачем там два модальных окна? да, вы правы, это костыль, не знаю, как сделать по другому
     return (
         <>
             <Modal visible={editModalVisible} setVisibility={setEditModalVisible} toDo={toDo} type='edit'/>
             <Modal visible={commentModalVisible} setVisibility={setCommentModalVisible} toDo={toDo} type='comment'/>
             <div className={toDoStyle.toDoWrapper}>
-                <div className={toDoStyle.toDoWrapper__description} onClick={() => toDo.displayComments()}>{toDo.description}</div>
+                {renderToDoDescription()}
                 <div className={toDoStyle.statusWrapper}>
                     {displayStatus()}
                 </div>

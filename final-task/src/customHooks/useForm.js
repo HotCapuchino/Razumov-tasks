@@ -1,7 +1,16 @@
+import { useEffect } from 'react';
 import {useState} from 'react';
 
 
 const useForm = (formFields) => {
+
+    // because of the fact react doesn't provide deep comparison,
+    // when it decides whether to rerender component or not, 
+    // I decided to check for a status as the only property, 
+    // that can be modified outside of the edit modal window
+    useEffect(() => {
+        setValues(formFields);
+    }, [formFields?.status]);
 
     const [values, setValues] = useState(formFields);
     const [errors, setErrors] = useState({});

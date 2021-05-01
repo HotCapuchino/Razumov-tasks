@@ -16,7 +16,6 @@ const ToDosList = observer((props) => {
             return toDoList.completedToDos.map(toDo => {
                 toDo.fetchContributors();
                 toDo.fetchComments();
-                // console.log('completed:', toDo);
                 return (
                     <li className={toDoListStyles.toDoItem} key={toDo.id}>
                         <ToDo toDo={toDo}/>
@@ -27,10 +26,9 @@ const ToDosList = observer((props) => {
             return toDoList.searchedToDos.map(toDo => {
                 toDo.fetchContributors();
                 toDo.fetchComments();
-                // console.log('unfinished:', toDo);
                 return (
                     <li className={toDoListStyles.toDoItem} key={toDo.id}>
-                        <ToDo toDo={toDo}/>
+                        <ToDo toDo={toDo} chosen={toDo.id === toDoList.chosenToDo.id ? true : false}/>
                     </li>
                 );
             });
@@ -67,7 +65,7 @@ const ToDosList = observer((props) => {
                             </button> :
                             null}
                     </div>
-                    <ul className={toDoListStyles.ToDosList + ' ' + toDoListStyles.test} onClick={(e) => passOrNot(e)}>
+                    <ul className={toDoListStyles.ToDosList + ' ' + toDoListStyles.test} onClickCapture={(e) => passOrNot(e)}>
                         {renderToDos()}
                     </ul>
                 </div>

@@ -8,13 +8,8 @@ function calcIndex(toDo_status) {
     });
 }
 
-function calcNewIndex(params) {
-    
-}
-
 function useToggle() {
-    return function(toDo_status, newIndex = null) {
-        if (!newIndex) console.log('no new index!');
+    return function(toDo_status, newIndex) {
         let currentStatusIndex = calcIndex(toDo_status);
         // checking if we have to change toDo completed value
         if (Math.abs(currentStatusIndex - newIndex) > 1 || currentStatusIndex * newIndex === 2) {

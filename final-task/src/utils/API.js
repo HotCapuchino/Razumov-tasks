@@ -195,8 +195,7 @@ export class API {
             if (response.status > 300) {
                 throw new Error('Unable to update data!');
             }
-        }
-        
+        }    
     }
 
     async deleteNotifications(user_id) {

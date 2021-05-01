@@ -1,4 +1,4 @@
-import {action, makeAutoObservable} from 'mobx';
+import {action, makeAutoObservable, runInAction} from 'mobx';
 import {api} from '../../utils/API';
 import {ToDoItem} from '../ToDoItem/ToDoItem';
 
@@ -17,6 +17,7 @@ class ToDoList {
     fetchToDos() {
         this.api.fetchToDos()
         .then(action(data => {
+            this.toDos = [];
             for (const toDo of data) {
                 this.toDos.push(new ToDoItem(this, toDo));
             }
@@ -28,15 +29,10 @@ class ToDoList {
         .catch(err => console.log(err));
     }
 
-    createToDo(description, importance, executor_id, author_id) {
+    createToDo(description, importance, executor_id, author_id, author_name) {
         this.api.createToDo(description, importance)
         .then(action((toDo) => {
             let {id, description, status, importance, completed} = toDo;
-            this.api.addContributor(id, author_id, 'author')
-            if (author_id !== executor_id) {
-                this.api.addContributor(id, executor_id, 'executor');
-                this.api.addNotification(executor_id, `Username made you an executor of ${description} ToDo`);
-            }   
             let createdToDo = new ToDoItem(this, {
                 id,
                 description, 
@@ -45,7 +41,23 @@ class ToDoList {
                 completed
             });
             this.toDos.push(createdToDo);
-            action(createdToDo.fetchContributors());
+            this.api.addContributor(id, author_id, 'author')
+            .then(action(() => {
+                createdToDo.contributors.push({
+                    user_id: author_id,
+                    role: 'author'
+                });
+                if (author_id !== executor_id) {
+                    this.api.addContributor(id, executor_id, 'executor')
+                    .then(action(() => {
+                        createdToDo.contributors.push({
+                            user_id: executor_id,
+                            role: 'executor'
+                        });
+                    }));
+                }  
+            })).catch(err => console.log(err));
+            this.api.addNotification(executor_id, `${author_name} made you an executor of ${description} ToDo`);   
         }))
         .catch(err => console.log(err));
     }
@@ -53,9 +65,16 @@ class ToDoList {
     removeToDo(id) {
         api.deleteToDo(id)
         .then(action(() => {
-            this.toDos = this.toDos.filter(function(toDo) {
-                if (toDo.id !== id) return toDo;
-            });
+            if (id === this.chosenToDo.id) {
+                runInAction(() => {
+                    this.chosenToDo = null;
+                })
+            }
+            runInAction(() => {
+                this.toDos = this.toDos.filter(function(toDo) {
+                    if (toDo.id !== id) return toDo;
+                });
+            })
         })).catch(err => console.log(err));
     }
 

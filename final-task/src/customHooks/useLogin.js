@@ -6,7 +6,7 @@ export const userContext = React.createContext();
 
 export const LoginContextProvider = (props) => {
     const [loginInfo, setLoginInfo] = useState(sessionStorage.getItem('loggedin') || false);
-    console.log(loginInfo);
+    
     return (
         <loginContext.Provider value={[loginInfo, setLoginInfo]}>
             {props.children}

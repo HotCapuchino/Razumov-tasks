@@ -1,4 +1,4 @@
-import {makeAutoObservable, action} from 'mobx';
+import {makeAutoObservable, action, runInAction} from 'mobx';
 
 class ToDoItem {
 
@@ -38,7 +38,7 @@ class ToDoItem {
                     this.contributors.push(contributor);
                 }
             }
-        })).catch(err => console.log(err));
+        })).catch(err => {});
     }
 
     fetchComments() {
@@ -46,7 +46,7 @@ class ToDoItem {
         .then(action((data) => {
             this.comments = data.comments_list;
         }))
-        .catch(err => console.log(err));
+        .catch(err => {});
     }
 
     toggle(author_id, toggler_name) {
@@ -68,12 +68,30 @@ class ToDoItem {
     leaveComment(user_id, userName, text) {
         console.log(user_id, userName, text);
         this.store.api.addComment(this.id, user_id, text)
-        .then(action(data => {
+        .then(action(async(data) => {
             this.comments.push(data);
-            this.store.api.addContributor(this.id, user_id, 'commentator');
+            let needToBeAdded = true;
+            for (const contributor of this.contributors) {
+                if (contributor.user_id == user_id) {
+                    needToBeAdded = false;
+                    break;
+                }
+            }
+            if (needToBeAdded) {
+                let response = await this.store.api.addContributor(this.id, user_id, 'commentator');
+                if (response) {
+                    runInAction(() => {
+                        this.contributors.push({
+                            user_id: user_id,
+                            role: 'commentator'
+                        })
+                    });
+                }
+            }
             this.store.api.addNotification(this.author_id, `${userName} has left comment on your task`);
-        })).catch(err => console.log(err));
+        })).catch(err => {});
     }
+    
 }
 
 export {ToDoItem};

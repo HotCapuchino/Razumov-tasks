@@ -1,4 +1,4 @@
-import {action, makeAutoObservable} from 'mobx';
+import {action, makeAutoObservable, when} from 'mobx';
 import {api} from '../../utils/API';
 
 
@@ -26,13 +26,14 @@ class Users {
         this.api.fetchNotifications(user_id)
         .then(data => {
             this.userNotifications = data.notifications_list;
-            console.log(data);
         }).catch(err => console.log(err));
     }
 
     markAsViewed(user_id) {
         this.api.deleteNotifications(user_id)
-        .then()
+        .then(() => {
+            this.userNotifications = [];
+        });
     }
 }
 
@@ -53,6 +54,10 @@ class User {
 
     fetchNotifications() {
         this.store.fetchNotifications(this.id);
+    }
+
+    clearNotifications() {
+        this.store.markAsViewed(this.id);
     }
 
 }

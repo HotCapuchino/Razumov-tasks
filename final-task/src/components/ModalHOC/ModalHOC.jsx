@@ -3,17 +3,15 @@ import { users } from '../../store/Users/Users';
 import toDoList from '../../store/ToDoList/ToDoList';
 import { useForm } from '../../customHooks/useForm';
 import modalStyles from './Modal.module.scss';
-import {useToggle} from '../../customHooks/useToggle';
+import {useToggle, calcIndex} from '../../customHooks/useToggle';
 import {observer} from 'mobx-react';
 import {userContext} from '../../customHooks/useLogin';
-// import {userNumber} from '../../App';
 
 const ModalHOC = (Component) => 
 
     observer(function InnerHOC({ setVisibility, visible, type, toDo }) {
 
         function defineFormFields() {
-            // console.log(`toDo description ${toDo?.description}`, toDo?.status);
             switch (type) { 
                 case 'create': {
                     return {
@@ -27,7 +25,7 @@ const ModalHOC = (Component) =>
                         description: toDo.description,
                         status: toDo.status,
                         importance: toDo.importance
-                    }
+                    };
                 }
                 case 'comment': {
                     return {
@@ -37,12 +35,10 @@ const ModalHOC = (Component) =>
             }
         }
 
-
         const { values, handleInput, errors, validateInputs, clearValues } = useForm(defineFormFields());
-
         const [errorVisibility, setErrorVisibility] = useState(false);
         const needToggle = useToggle();
-        const userNum = useContext(userContext);
+        const [userNum,] = useContext(userContext);
 
         function handleCloseButton() {
             setVisibility(false);
@@ -59,7 +55,9 @@ const ModalHOC = (Component) =>
             }
             switch (modalType) {
                 case 'edit': {
-                    // if ()
+                    if (needToggle(toDo.status, calcIndex(values.status))) {
+                        toDo.toggle(toDo.author_id, users.users[userNum].name);
+                    }
                     toDo.edit({
                         description: values.description,
                         status: values.status,
@@ -69,13 +67,17 @@ const ModalHOC = (Component) =>
                 }
                 break;
                 case 'comment': {
-                    toDo.leaveComment(userNum, users.users[userNum].name, values.comment);
+                    toDo.leaveComment(Number(userNum), users.users[userNum].name, values.comment);
                     handleCloseButton();
                 }
                 break;
                 case 'create': {
                     let executor = values.executor_id || Object.keys(users.users)[0];
-                    toDoList.createToDo(values.description, values.importance, Number(executor), userNum);
+                    toDoList.createToDo(values.description, 
+                            values.importance, 
+                            Number(executor), 
+                            Number(userNum), 
+                            users.users[userNum].name);
                     handleCloseButton();
                 }
                 break;
@@ -141,7 +143,7 @@ const ModalHOC = (Component) =>
                                             <option value="pending">Pending</option>
                                             <option value="inprogress">In Progress</option>
                                             <option value="completed">Completed</option>
-                                            <option value="critical">Critical</option>
+                                            <option value="cancelled">Cancelled</option>
                                         </select>
                                     </>}
                             </div>
@@ -154,7 +156,10 @@ const ModalHOC = (Component) =>
                             <div className={modalStyles.toDoInfo}>
                                 <img alt='there has to be an image' src={users.users[toDo?.author_id]?.photo}
                                     className={modalStyles.toDoInfo__photo}/>
-                                <div className={modalStyles.toDoInfo__text}>{toDo.description}</div>
+                                    <div className={modalStyles.userInfo}>
+                                    <div className={modalStyles.userInfo__name}>{users.users[toDo?.author_id]?.name}</div>
+                                        <div className={modalStyles.userInfo__text}>{toDo.description}</div>
+                                    </div>
                             </div>
                             <div>
                                 <label className={modalStyles.label}>Leave you comment here</label>

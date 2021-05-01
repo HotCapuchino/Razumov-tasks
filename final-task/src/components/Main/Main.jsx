@@ -16,7 +16,6 @@ const Main = observer(() => {
     const [userId,] = useContext(userContext);
 
     useEffect(() => {
-        console.log(loggedIn, userId);
         if (loggedIn) {
             toDoList.fetchToDos();
             users.fetchNotifications(userId);

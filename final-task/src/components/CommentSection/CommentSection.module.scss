@@ -1,12 +1,18 @@
 @import '../../styles/general/colours.scss';
 @import '../../styles/general/layout.scss';
 @import '../../styles/general/reset.css';
+@import '../../styles/mixins/fonts.scss';
+@import '../../styles/mixins/media.scss';
 
 
 .commentsBlock {
     @extend .flex-container-column;
     height: 100%;
     width: 25%;
+
+    @include _max992 {
+        display: none;
+    }
 }
 
 .commentsList {
@@ -16,5 +22,10 @@
 
     &__comment {
         margin-bottom: 20px;
+    }
+
+    &__noComments {
+        @include font-options('Poppins', 16px, 700);
+        color: $normal;
     }
 }
