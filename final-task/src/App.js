@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import './App.css';
 import Main from './components/Main/Main';
+import LoginPage from './components/LoginPage/LoginPage';
 import {users} from './store/Users/Users';
-
-let userNumber = React.createContext(Math.ceil(Math.random() * 12));
+import {Redirect, Switch, Route} from 'react-router-dom';
+import {LoginContextProvider, UserContextProvider} from './customHooks/useLogin';
 
 function App() {
   useEffect(() => {
@@ -11,11 +12,18 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Main/>
-    </div>
+    <LoginContextProvider>
+      <UserContextProvider>
+        <div className="App">
+          <Switch>
+            <Route path='/toDo' component={Main}/>
+            <Route path='/login' component={LoginPage}/>
+            <Redirect from='/' to='/login'/>
+          </Switch>
+        </div>
+      </UserContextProvider>
+    </LoginContextProvider>
   );
 }
 
 export default App;
-export {userNumber};

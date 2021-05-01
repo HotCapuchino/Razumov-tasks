@@ -49,8 +49,8 @@ class ToDoItem {
         .catch(err => console.log(err));
     }
 
-    toggle() {
-        this.store.toggleToDo(this.id, this, this.completed);
+    toggle(author_id, toggler_name) {
+        this.store.toggleToDo(this.id, this, this.completed, author_id, toggler_name);
     }
 
     delete() {
@@ -65,11 +65,13 @@ class ToDoItem {
         this.store.setChosen(this);
     }
 
-    leaveComment(user_id, text) {
+    leaveComment(user_id, userName, text) {
+        console.log(user_id, userName, text);
         this.store.api.addComment(this.id, user_id, text)
         .then(action(data => {
             this.comments.push(data);
             this.store.api.addContributor(this.id, user_id, 'commentator');
+            this.store.api.addNotification(this.author_id, `${userName} has left comment on your task`);
         })).catch(err => console.log(err));
     }
 }

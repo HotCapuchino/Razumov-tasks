@@ -1,26 +1,25 @@
-import React, {useContext} from 'react';
+import React, {useContext,  useState} from 'react';
 import { users } from '../../store/Users/Users';
 import toDoList from '../../store/ToDoList/ToDoList';
 import { useForm } from '../../customHooks/useForm';
 import modalStyles from './Modal.module.scss';
-import { useState } from 'react';
 import {useToggle} from '../../customHooks/useToggle';
 import {observer} from 'mobx-react';
-import {userNumber} from '../../App';
+import {userContext} from '../../customHooks/useLogin';
+// import {userNumber} from '../../App';
 
 const ModalHOC = (Component) => 
 
     observer(function InnerHOC({ setVisibility, visible, type, toDo }) {
-        const { values, handleInput, errors, validateInputs, clearValues } = useForm(() => {
 
-            console.log(toDo?.status);
-
+        function defineFormFields() {
+            // console.log(`toDo description ${toDo?.description}`, toDo?.status);
             switch (type) { 
                 case 'create': {
                     return {
                         description: '',
                         importance: 'minor',
-                        executor_id: ''
+                        executor_id: 1
                     }
                 }
                 case 'edit': {
@@ -36,11 +35,14 @@ const ModalHOC = (Component) =>
                     }
                 }
             }
-        });
+        }
+
+
+        const { values, handleInput, errors, validateInputs, clearValues } = useForm(defineFormFields());
 
         const [errorVisibility, setErrorVisibility] = useState(false);
         const needToggle = useToggle();
-        const userNum = useContext(userNumber);
+        const userNum = useContext(userContext);
 
         function handleCloseButton() {
             setVisibility(false);
@@ -49,6 +51,7 @@ const ModalHOC = (Component) =>
         function handleOkButton(modalType) {
             if (!validateInputs()) {
                 setErrorVisibility(true);
+                console.log('Some of the fields are empty!', values);
                 setTimeout(() => {
                     setErrorVisibility(false);
                 }, 2000)
@@ -56,17 +59,17 @@ const ModalHOC = (Component) =>
             }
             switch (modalType) {
                 case 'edit': {
-                    // if (needToggle())
-                    // toDo.edit({
-                    //     description: values.description,
-                    //     status: values.status,
-                    //     importance: values.importance
-                    // });
+                    // if ()
+                    toDo.edit({
+                        description: values.description,
+                        status: values.status,
+                        importance: values.importance
+                    });
                     handleCloseButton();
                 }
                 break;
                 case 'comment': {
-                    toDo.leaveComment(userNum, values.comment);
+                    toDo.leaveComment(userNum, users.users[userNum].name, values.comment);
                     handleCloseButton();
                 }
                 break;
@@ -149,7 +152,8 @@ const ModalHOC = (Component) =>
                     return (
                         <form>
                             <div className={modalStyles.toDoInfo}>
-                                <img alt='there has to be an image' />
+                                <img alt='there has to be an image' src={users.users[toDo?.author_id]?.photo}
+                                    className={modalStyles.toDoInfo__photo}/>
                                 <div className={modalStyles.toDoInfo__text}>{toDo.description}</div>
                             </div>
                             <div>

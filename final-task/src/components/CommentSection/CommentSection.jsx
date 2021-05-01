@@ -1,25 +1,30 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import commentSectionStyles from './CommentSection.module.scss';
 import SingleComment from '../SingleComment/SingleComment';
 import {observer} from 'mobx-react';
 import toDoList from '../../store/ToDoList/ToDoList';
 import {users} from '../../store/Users/Users';
+import {userContext} from '../../customHooks/useLogin';
 
 const CommentSection = observer(() => {
+
+    const [userNum,] = useContext(userContext);
 
     function renderComments() {
         if (toDoList?.chosenToDo?.comments) {
             let comms = [];
             for (let i = toDoList.chosenToDo.comments.length - 1; i >= 0; i--) {
                 let comment = toDoList.chosenToDo.comments[i];
+                let user = users.users[comment.user_id];
                 comms.push(
                     <li key={i}>
                         <SingleComment text={comment.text} 
-                            userName={users.users[comment.user_id].name}
-                            photo={users.users[comment.user_id].photo}
-                            toDoOwner={comment.user_id} 
+                            commentatorName={user.name}
+                            photo={user.photo}
+                            toDoOwner={users.users[toDoList.chosenToDo.author_id].name} 
                             time={comment.time}
-                            toDoName={toDoList.chosenToDo.description}/>
+                            toDoName={toDoList.chosenToDo.description}
+                            currentUserName={users.users[userNum].name}/>
                     </li>
                 );
             }

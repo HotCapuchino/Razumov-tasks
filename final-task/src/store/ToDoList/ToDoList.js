@@ -33,11 +33,10 @@ class ToDoList {
         .then(action((toDo) => {
             let {id, description, status, importance, completed} = toDo;
             this.api.addContributor(id, author_id, 'author')
-            .then(action(() => {
-                if (author_id !== executor_id) {
-                    this.api.addContributor(id, executor_id, 'executor');
-                }
-            })).catch(err => console.log(err));
+            if (author_id !== executor_id) {
+                this.api.addContributor(id, executor_id, 'executor');
+                this.api.addNotification(executor_id, `Username made you an executor of ${description} ToDo`);
+            }   
             let createdToDo = new ToDoItem(this, {
                 id,
                 description, 
@@ -46,7 +45,7 @@ class ToDoList {
                 completed
             });
             this.toDos.push(createdToDo);
-            createdToDo.fetchContributors();
+            action(createdToDo.fetchContributors());
         }))
         .catch(err => console.log(err));
     }
@@ -60,10 +59,17 @@ class ToDoList {
         })).catch(err => console.log(err));
     }
 
-    toggleToDo(id, ref, value) {
+    toggleToDo(id, ref, value, author_id, toggler_name) {
         api.toggleToDo(id, !value)
         .then(action(() => {
             ref.completed = !value;
+            let notificationText = '';
+            if (ref.completed) {
+                notificationText = `${toggler_name} has completed your task`;
+            } else {
+                notificationText = `${toggler_name} has resumed your task`;
+            }
+            api.addNotification(author_id, notificationText)
         })).catch(err => console.log(err));
     }
 

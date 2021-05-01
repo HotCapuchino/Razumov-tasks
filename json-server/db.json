@@ -1,58 +1,98 @@
 {
   "tasks": [
     {
-      "id": 1619706958575,
-      "description": "Bring vine to jesus",
+      "id": 1619750215921,
+      "description": "Иправить баг с контрибьютерами (перерисовка ТуДу после добавления комментатора и выполняющего)",
       "status": "pending",
       "importance": "normal",
       "completed": false
     },
     {
-      "id": 1619710031425,
-      "description": "Come to Jeruesalim ",
+      "id": 1619750357983,
+      "description": "Исправить баг с отображением неправильного статуса во время редактирования (status)",
       "status": "pending",
-      "importance": "critical",
+      "importance": "minor",
       "completed": false
+    },
+    {
+      "id": 1619750410408,
+      "description": "Простой экран регистрации + роутинг, возможность смены юзера",
+      "status": "pending",
+      "importance": "normal",
+      "completed": false
+    },
+    {
+      "id": 1619750442695,
+      "description": "Отображение кто и чей таск комментирует",
+      "status": "completed",
+      "importance": "normal",
+      "completed": true
+    },
+    {
+      "id": 1619750487359,
+      "description": "Отображение времени добавления комментария",
+      "status": "completed",
+      "importance": "normal",
+      "completed": true
+    },
+    {
+      "id": 1619750522607,
+      "description": "Отображение notifications",
+      "status": "completed",
+      "importance": "normal",
+      "completed": true
+    },
+    {
+      "id": 1619763193792,
+      "description": "Редактировать ТуДу может только его создатель",
+      "status": "completed",
+      "importance": "normal",
+      "completed": true
     }
   ],
   "comments": [
     {
-      "id": 1619706958575,
+      "id": 1619750442695,
       "comments_list": [
         {
-          "user_id": 2,
-          "time": 1619706974705,
-          "text": "Awesome Task!"
-        },
-        {
-          "user_id": 12,
-          "time": 1619707647388,
-          "text": "Youuuuu!! Shit"
-        },
-        {
-          "user_id": 11,
-          "time": 1619707669848,
-          "text": "Rabotaet!"
-        },
-        {
           "user_id": 5,
-          "time": 1619708086401,
-          "text": "Йоу Йоу"
+          "time": 1619751193566,
+          "text": "Test Comment"
+        },
+        {
+          "user_id": 4,
+          "time": 1619751232983,
+          "text": "Another test comment"
         }
       ]
     },
     {
-      "id": 1619710031425,
+      "id": 1619750487359,
       "comments_list": [
         {
-          "user_id": 11,
-          "time": 1619710086354,
-          "text": "Great Task!!"
-        },
+          "user_id": 10,
+          "time": 1619751753695,
+          "text": "Test comment to Andrew Task"
+        }
+      ]
+    },
+    {
+      "id": 1619750522607,
+      "comments_list": [
         {
-          "user_id": 7,
-          "time": 1619710123545,
-          "text": "Test comm"
+          "user_id": 10,
+          "time": 1619751803455,
+          "text": "Test comment on Varfolomey Task"
+        }
+      ]
+    },
+    {
+      "id": 1619763193792,
+      "comments_list": [
+        {
+          "user_id": 2,
+          "time": 1619776811026,
+          "text": "Это было реально легко"
         }
       ]
     }
@@ -121,36 +161,84 @@
   ],
   "contributors": [
     {
-      "id": 1619706958575,
+      "id": 1619750215921,
       "contributors_list": [
         {
-          "user_id": 10,
+          "user_id": 1,
+          "role": "author"
+        }
+      ]
+    },
+    {
+      "id": 1619750357983,
+      "contributors_list": [
+        {
+          "user_id": 11,
           "role": "author"
         },
         {
-          "user_id": 6,
+          "user_id": 3,
           "role": "executor"
         },
         {
-          "user_id": 2,
-          "role": "commentator"
-        },
-        {
-          "user_id": 12,
-          "role": "commentator"
-        },
-        {
-          "user_id": 11,
-          "role": "commentator"
-        },
-        {
-          "user_id": 5,
+          "user_id": 4,
           "role": "commentator"
         }
       ]
     },
     {
-      "id": 1619710031425,
+      "id": 1619750410408,
+      "contributors_list": [
+        {
+          "user_id": 2,
+          "role": "author"
+        },
+        {
+          "user_id": 1,
+          "role": "executor"
+        }
+      ]
+    },
+    {
+      "id": 1619750442695,
+      "contributors_list": [
+        {
+          "user_id": 9,
+          "role": "author"
+        },
+        {
+          "user_id": 8,
+          "role": "executor"
+        },
+        {
+          "user_id": 5,
+          "role": "commentator"
+        },
+        {
+          "user_id": 4,
+          "role": "commentator"
+        }
+      ]
+    },
+    {
+      "id": 1619750487359,
+      "contributors_list": [
+        {
+          "user_id": 6,
+          "role": "author"
+        },
+        {
+          "user_id": 1,
+          "role": "executor"
+        },
+        {
+          "user_id": 10,
+          "role": "commentator"
+        }
+      ]
+    },
+    {
+      "id": 1619750522607,
       "contributors_list": [
         {
           "user_id": 6,
@@ -161,12 +249,48 @@
           "role": "executor"
         },
         {
-          "user_id": 11,
+          "user_id": 10,
           "role": "commentator"
+        }
+      ]
+    },
+    {
+      "id": 1619763193792,
+      "contributors_list": [
+        {
+          "user_id": 11,
+          "role": "author"
         },
         {
-          "user_id": 7,
-          "role": "commentator"
+          "user_id": 2,
+          "role": "executor"
+        }
+      ]
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "notifications_list": [
+        {
+          "text": "Pyotr has left comment on your task!"
+        },
+        {
+          "text": "Simon has made you contributor for ... task"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "notifications_list": [
+        {
+          "text": "Pyotr has completed your task"
+        },
+        {
+          "text": "Andrew has resumed your task"
+        },
+        {
+          "text": "Filipp has completed your task"
         }
       ]
     }

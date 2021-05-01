@@ -1,24 +1,35 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import navStyles from './NavBar.module.scss';
 import { useSearch } from '../../customHooks/useSearch';
 import { Dropdown, Menu } from 'antd';
 import {observer} from 'mobx-react';
+import Notifications from '../Notifications/Notifications';
+import {loginContext, userContext} from '../../customHooks/useLogin';
 
 const NavBar = observer(({user}) => {
 
     const [searchedText, setSearchedText] = useState('');
     const [iconVisibility, setIconVisibililty] = useState(true);
     const searchFor = useSearch();
+    const [loggedIn, setLoggedIn] = useContext(loginContext);
+    const [userId, setUserId] = useContext(userContext);
 
     function handleTextChanging(event) {
         setSearchedText(event.target.value);
         searchFor(event.target.value);
     }
 
+    function handleLogOut() {
+        sessionStorage.setItem('loggedin', false);
+        sessionStorage.removeItem('userid');
+        setLoggedIn(false);
+        setUserId(null);
+    }
+
     const userInfoMenu = (
         <Menu>
             <Menu.Item>{user?.name}</Menu.Item>
-            <Menu.Item>Change User</Menu.Item>
+            <Menu.Item onClick={handleLogOut}>Change User</Menu.Item>
         </Menu>
     );
 
@@ -32,11 +43,7 @@ const NavBar = observer(({user}) => {
                     onBlur={() => setIconVisibililty(true)}/>
             </div>
             <div className={navStyles.userBlock}>
-                <div className={navStyles.notificationsBlock}>
-                    <Dropdown trigger={['click']} >
-                        <img src='/assets/icons/notifications.svg' className={navStyles.notificationsBlock__bell}/>
-                    </Dropdown>
-                </div>
+                <Notifications />
                 <div className={navStyles.userInfo}>
                     <Dropdown trigger={['click']} overlay={userInfoMenu}>
                         <img src={user?.photo} alt="pic profile" className={navStyles.userInfo__photo}/>

@@ -16,6 +16,7 @@ const ToDosList = observer((props) => {
             return toDoList.completedToDos.map(toDo => {
                 toDo.fetchContributors();
                 toDo.fetchComments();
+                // console.log('completed:', toDo);
                 return (
                     <li className={toDoListStyles.toDoItem} key={toDo.id}>
                         <ToDo toDo={toDo}/>
@@ -26,6 +27,7 @@ const ToDosList = observer((props) => {
             return toDoList.searchedToDos.map(toDo => {
                 toDo.fetchContributors();
                 toDo.fetchComments();
+                // console.log('unfinished:', toDo);
                 return (
                     <li className={toDoListStyles.toDoItem} key={toDo.id}>
                         <ToDo toDo={toDo}/>

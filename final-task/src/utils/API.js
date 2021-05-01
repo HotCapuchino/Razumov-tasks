@@ -86,6 +86,9 @@ export class API {
         try {
             let response = await this.request.get(`/contributors/${toDo_id}`);
             let contributors_list = response.data.contributors_list;
+            for (const contributor of contributors_list) {
+                if (contributor.user_id === user_id) return true;
+            }
             contributors_list.push({user_id: user_id, role: role});
             response = await this.request.patch(`/contributors/${toDo_id}`, {contributors_list: contributors_list});
         } catch(err) {
@@ -163,6 +166,45 @@ export class API {
             return response.data;
         } else {
             throw new Error('Unable to fetch data!');
+        }
+    }
+
+    async fetchNotifications(user_id) {
+        let response = await this.request.get(`/notifications/${user_id}`);
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            throw new Error('Unable to fetch data!');
+        }
+    }
+
+    async addNotification(user_id, text) {
+        let new_notification = {text};
+        try {
+            let response = await this.request.get(`/notifications/${user_id}`);
+            let notifications_list = response.data.notifications_list;
+            notifications_list.push(new_notification);
+            response = await this.request.patch(`/notifications/${user_id}`, {notifications_list: notifications_list});
+        } catch(err) {
+            let notifications = [];
+            notifications.push(new_notification);
+            let response = await this.request.post('/notifications', {
+                id: user_id,
+                notifications_list: notifications
+            });
+            if (response.status > 300) {
+                throw new Error('Unable to update data!');
+            }
+        }
+        
+    }
+
+    async deleteNotifications(user_id) {
+        try {
+            await this.request.delete(`/notifications/${user_id}`);
+            return true;
+        } catch(e) {
+            console.log(e);
         }
     }
 

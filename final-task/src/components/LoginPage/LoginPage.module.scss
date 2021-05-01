@@ -1,0 +1,77 @@
+@import '../../styles/general/colours.scss';
+@import '../../styles/general/layout.scss';
+@import '../../styles/general/reset.css';
+@import '../../styles/mixins/fonts.scss';
+
+
+.loginBlock {
+    position: absolute;
+    background-color: $main-background;
+    top: 10%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    min-height: 50%;
+    width: 30%;
+    box-shadow: 0px 4px 40px #8CA4D8;
+    border-radius: 30px;
+    padding: 3% 3%;
+
+    &__title {
+        @include font-options('Poppins', 30px, 700);
+    }
+
+    &__button {
+        @include font-options('Poppins', 18px, 700);
+        background-color: $purple;
+        color: $comment-background;
+        padding: 5px 12px;
+        border-radius: 5px
+    }
+}
+
+.loginSection {
+    @extend .flex-container-column;
+    margin-top: 100px;
+    margin-bottom: 200px;
+
+    &__subtitle {
+        @include font-options('Poppins', 24px, 700);
+        text-align: left;
+        margin-bottom: 20px;
+    }
+}
+
+.dropdownItem, .userInfo {
+    @extend .flex-container-row;
+    align-items: center;
+    cursor: pointer;
+}
+
+.userInfo {
+    padding: 10px 5px;
+    border-radius: 5px;
+}
+
+.usersDropdownList {
+    max-height: 400px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.dropdownItem:hover, .userInfo:hover {
+    background-color: $comment-background;
+}
+
+.dropdownItem__photo, 
+.userInfo__photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+
+.dropdownItem__name, 
+.userInfo__name {
+    @include font-options('Poppins', 16px, 700);
+}

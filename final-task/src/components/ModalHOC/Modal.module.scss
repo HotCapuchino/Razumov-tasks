@@ -87,10 +87,22 @@
 
 .toDoInfo {
     @extend .flex-container-row;
+    align-items: flex-end;
     margin-bottom: 15px;
+    background-color: rgba($comment-background, 0.7);
+    padding: 10px 10px;
+    border-radius: 8px;
 
     &__text {
-        font-weight: bold;
+        @include font-options('Poppins', 18px, 700);
+        // font-weight: bold;
         color: $normal;
+    }
+
+    &__photo {
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+        margin-right: 15px;
     }
 }

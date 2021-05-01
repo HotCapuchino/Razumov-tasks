@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import toDoStyle from './ToDo.module.scss';
 import { Dropdown, Menu } from 'antd';
 import 'antd/dist/antd.css';
 import { observer } from 'mobx-react';
 import { users } from '../../store/Users/Users';
 import Modal from '../ModalHOC/Modal';
-import {useToggle, calcIndex} from '../../customHooks/useToggle';
+import { useToggle, calcIndex } from '../../customHooks/useToggle';
+import {userContext} from '../../customHooks/useLogin';
 
 const ToDo = observer(({ toDo }) => {
 
@@ -13,7 +14,7 @@ const ToDo = observer(({ toDo }) => {
     const [editModalVisible, setEditModalVisible] = useState(false);
     const [commentModalVisible, setCommentModalVisible] = useState(false);
     const needToggle = useToggle();
-    // console.log(toDo);
+    const [userNum,] = useContext(userContext);
 
     function renderContributors() {
         let contributors_list = [];
@@ -40,8 +41,12 @@ const ToDo = observer(({ toDo }) => {
 
     const actionsMenu = (
         <Menu>
-            <Menu.Item key='1' onClick={() => handleDropdownToDoActions('edit')}>Edit</Menu.Item>
-            <Menu.Item key='2' onClick={() => handleDropdownToDoActions('delete')}>Delete</Menu.Item>
+            {userNum === toDo.author_id ? 
+            <>
+                <Menu.Item key='1' onClick={() => handleDropdownToDoActions('edit')}>Edit</Menu.Item> 
+                <Menu.Item key='2' onClick={() => handleDropdownToDoActions('delete')}>Delete</Menu.Item>
+            </>
+            : null }
             <Menu.Item key='3' onClick={() => handleDropdownToDoActions('comment')}>Comment</Menu.Item>
         </Menu>
     );
@@ -87,7 +92,7 @@ const ToDo = observer(({ toDo }) => {
 
     function handleDropdownStatusActions(newStatus, newIndex) {
         if (needToggle(toDo.status, newIndex)) {
-            toDo.toggle();
+            toDo.toggle(toDo.author_id, users.users[userNum].name);
         }
         toDo.edit({
             description: toDo.description,
