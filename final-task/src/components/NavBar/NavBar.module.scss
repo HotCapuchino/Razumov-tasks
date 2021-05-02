@@ -1,6 +1,7 @@
 @import '../../styles/general/colours.scss';
 @import '../../styles/general/layout.scss';
 @import '../../styles/general/reset.css';
+@import '../../styles/mixins/media.scss';
 
 .navBarWrapper {
     @extend .flex-container-row;
@@ -8,6 +9,11 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
+    @include _max768 {
+        height: auto;
+        margin-bottom: 20px;
+    }
 }
 
 .userBlock {
@@ -39,8 +45,12 @@
 .notificationsBlock {
     @extend .flex-container-row;
     align-items: center;
-    justify-content: flex-end;
     width: 75%;
+    justify-content: flex-end;
+
+    @include _max480 {
+        width: 50%;
+    }
 
     &__bell {
         cursor: pointer;
@@ -51,6 +61,10 @@
 .userInfo {
     width: 25%;
     border-radius: 100%;
+
+    @include _max480 {
+        width: 50%;
+    }   
 
     &__photo {
         cursor: pointer;

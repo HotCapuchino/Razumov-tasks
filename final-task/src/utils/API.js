@@ -61,14 +61,13 @@ export class API {
     }
 
     async deleteToDo(toDo_id) {
-        Promise.all([
+        Promise.allSettled([
             this.request.delete(`/tasks/${toDo_id}`),
             this.request.delete(`/contributors/${toDo_id}`),
             this.request.delete(`/comments/${toDo_id}`)
         ]).then(() => true)
         .catch(err => {
             console.log(err);
-            // throw new Error('Error occurred while trying to delete toDo!');
         });
     }
 

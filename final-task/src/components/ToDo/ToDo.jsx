@@ -7,6 +7,7 @@ import { users } from '../../store/Users/Users';
 import Modal from '../ModalHOC/Modal';
 import { useToggle, calcIndex } from '../../customHooks/useToggle';
 import {userContext} from '../../customHooks/useLogin';
+import CommentsDropdown from '../CommentSection/CommentSection';
 
 const ToDo = observer(({ toDo, chosen }) => {
 
@@ -29,7 +30,11 @@ const ToDo = observer(({ toDo, chosen }) => {
         return () => {
             window.removeEventListener('resize', setCommentModalVisible);
         }
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        console.log(toDo?.description, toDo?.status, toDo?.importance);
+    }, [toDo?.description, toDo?.status, toDo?.importance]);
 
     function renderContributors() {
         let contributors_list = [];
@@ -96,6 +101,7 @@ const ToDo = observer(({ toDo, chosen }) => {
             }
             break;
             case 'delete': {
+                console.log(toDo);
                 try {
                     toDo.delete();
                 } catch (err) {
@@ -140,7 +146,7 @@ const ToDo = observer(({ toDo, chosen }) => {
     function renderToDoDescription() {
         if (isCommentsDropdown) {
             return (
-                <Dropdown trigger={['click']}>
+                <Dropdown trigger={['click']} overlay={<CommentsDropdown type='dropdown'/>}>
                     <div className={toDoStyle.toDoWrapper__description + `${chosen ? ` ${toDoStyle.chosenToDo}` : ''}`} 
                         onClick={() => toDo.displayComments()}>{toDo.description}</div>
                 </Dropdown> 
@@ -160,20 +166,22 @@ const ToDo = observer(({ toDo, chosen }) => {
             <Modal visible={commentModalVisible} setVisibility={setCommentModalVisible} toDo={toDo} type='comment'/>
             <div className={toDoStyle.toDoWrapper}>
                 {renderToDoDescription()}
-                <div className={toDoStyle.statusWrapper}>
-                    {displayStatus()}
+                <div className={toDoStyle.wrapInfo}>
+                    <div className={toDoStyle.statusWrapper}>
+                        {displayStatus()}
+                    </div>
+                    <div className={toDoStyle.importanceWrapper}>
+                        {displayImportance()}
+                    </div>
+                    <ul className={toDoStyle.contributorsList}>
+                        {renderContributors()}
+                    </ul>
+                    <Dropdown trigger={['click']} overlay={actionsMenu} >
+                        <button className={toDoStyle.dropdownActions}>
+                            ...
+                        </button>
+                    </Dropdown>
                 </div>
-                <div className={toDoStyle.importanceWrapper}>
-                    {displayImportance()}
-                </div>
-                <ul className={toDoStyle.contributorsList}>
-                    {renderContributors()}
-                </ul>
-                <Dropdown trigger={['click']} overlay={actionsMenu} >
-                    <button className={toDoStyle.dropdownActions}>
-                        ...
-                    </button>
-                </Dropdown>
             </div>
         </>
     )

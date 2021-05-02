@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import notificationStyles from './Notifications.module.scss';
-import {Dropdown, Menu} from 'antd';
-import {users} from '../../store/Users/Users';
-import {observer} from 'mobx-react';
+import { Dropdown, Menu } from 'antd';
+import { users } from '../../store/Users/Users';
+import { observer } from 'mobx-react';
 
-const Notifications = observer(({clearNotifications}) => {
+const Notifications = observer(({ clearNotifications }) => {
 
     const [dropDownVisible, setDropDownVisible] = useState(null);
     //this hook is responsible for deleting user notifications only when dropdown is closed!
     useEffect(() => {
-        if(dropDownVisible === false) {
+        if (dropDownVisible === false) {
             clearNotifications();
         }
 
@@ -17,7 +17,7 @@ const Notifications = observer(({clearNotifications}) => {
 
     function renderNotifications() {
         let notifications = users?.userNotifications.map((notification, index) => {
-            return ( 
+            return (
                 <Menu.Item key={index}>
                     {notification.text}
                 </Menu.Item>
@@ -26,7 +26,7 @@ const Notifications = observer(({clearNotifications}) => {
         if (notifications.length) {
             return (
                 <Menu>
-                    {notifications}    
+                    {notifications}
                 </Menu>
             );
         } else {
@@ -44,15 +44,15 @@ const Notifications = observer(({clearNotifications}) => {
 
     return (
         <div className={notificationStyles.notificationsBlock}>
-            <Dropdown trigger={['click']} overlay={renderNotifications()} 
+            <Dropdown trigger={['click']} overlay={renderNotifications()}
                 onVisibleChange={handleVisibility} placement='bottomCenter'>
-                <div className={notificationStyles.notificationBell}>
-                    <img className={notificationStyles.notificationsBell__image} 
-                        src='/assets/icons/notifications.svg'/>
-                    {users?.userNotifications.length ? 
-                    <div className={notificationStyles.notificationsBell__notifications}>
-                        {users.userNotifications.length}
-                    </div> : null}
+                <div className={notificationStyles.notificationsBell}>
+                    <img className={notificationStyles.notificationsBell__image}
+                        src='/assets/icons/notifications.svg' />
+                    {users?.userNotifications.length ?
+                        <div className={notificationStyles.notificationsBell__notifications}>
+                            {users.userNotifications.length}
+                        </div> : null}
                 </div>
             </Dropdown>
         </div>

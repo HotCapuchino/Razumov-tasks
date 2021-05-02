@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Dropdown, Menu} from 'antd';
 import loginStyles from './LoginPage.module.scss';
 import {users} from '../../store/Users/Users';
@@ -11,6 +11,11 @@ const LoginPage = observer(() => {
     const [isLogged, setIsLogged] = useContext(loginContext);
     const [userId, setUserId] = useContext(userContext);
     const [chosenId, setChosenId] = useState(1);
+
+    useEffect(() => {
+        console.log(isLogged, userId);
+        console.log(sessionStorage.getItem('loggedin'), sessionStorage.getItem('userid'));
+    }, [])
 
     function renderUsers() {
         const usersList = Object.keys(users?.users).map(key => {

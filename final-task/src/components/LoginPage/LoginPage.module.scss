@@ -2,6 +2,7 @@
 @import '../../styles/general/layout.scss';
 @import '../../styles/general/reset.css';
 @import '../../styles/mixins/fonts.scss';
+@import '../../styles/mixins/media.scss';
 
 
 .loginBlock {
@@ -13,9 +14,19 @@
     margin: auto;
     min-height: 50%;
     width: 30%;
+    min-width: 480px;
     box-shadow: 0px 4px 40px #8CA4D8;
     border-radius: 30px;
     padding: 3% 3%;
+
+    @include _max480 {
+        top: 0%;
+        padding-top: 100px;
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
 
     &__title {
         @include font-options('Poppins', 30px, 700);
@@ -26,7 +37,14 @@
         background-color: $purple;
         color: $comment-background;
         padding: 5px 12px;
-        border-radius: 5px
+        border-radius: 5px;
+        border: 2px solid transparent;
+    }
+
+    &__button:hover {
+        color: $purple;
+        border-color: $purple;
+        background-color: transparent;
     }
 }
 

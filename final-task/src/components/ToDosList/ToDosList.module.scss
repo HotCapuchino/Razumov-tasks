@@ -1,7 +1,7 @@
 @import '../../styles/general/colours.scss';
 @import '../../styles/general/layout.scss';
 @import '../../styles/general/reset.css';
-
+@import '../../styles/mixins/media.scss';
 
 .loadingWrapper {
     @extend .flex-container-row;
@@ -11,6 +11,9 @@
 .toDoListWrapper {
     @extend .flex-container-column;
     padding: 10px 0;
+    max-height: 500px;
+    overflow-y: scroll;
+    scroll-behavior: auto;
 }
 .titleBlock {
     @extend .flex-container-row;
@@ -33,9 +36,17 @@
 }
 .hold {
     height: 50%;
+
+    @include _max768 {
+        height: auto;
+    }
 }
 .completed {
     height: 35%;
+
+    @include _max768 {
+        height: auto;
+    }
 }
 .inactive {
     opacity: 0.5;
@@ -48,9 +59,6 @@
 ::-webkit-scrollbar {
     width: 5px;
 }
-// ::-webkit-scrollbar-track {
-//     background: $grey; 
-// }
 ::-webkit-scrollbar-thumb {
     background: $grey; 
 }
@@ -64,4 +72,8 @@
     color: #f3477ab3;
     display: inline;
     margin-right: 10px;
+
+    @include _max768 {
+        line-height: 100px;
+    }
 }

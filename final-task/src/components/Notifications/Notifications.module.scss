@@ -1,6 +1,7 @@
 @import '../../styles/general/colours.scss';
 @import '../../styles/general/layout.scss';
 @import '../../styles/general/reset.css';
+@import '../../styles/mixins/fonts.scss';
 
 
 .notificationsBell {
@@ -13,9 +14,13 @@
     }    
 
     &__notifications {
+        @include font-options('Poppins', 10px, 700);
         position: absolute;
         border-radius: 100%;
-        height: 5px; 
+        height: 15px; 
+        width: 15px;
+        background-color: $pink;
+        color: $comment-background;
         top: 0;
         right: 0;
     }

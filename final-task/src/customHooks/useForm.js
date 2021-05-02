@@ -6,11 +6,11 @@ const useForm = (formFields) => {
 
     // because of the fact react doesn't provide deep comparison,
     // when it decides whether to rerender component or not, 
-    // I decided to check for a status as the only property, 
+    // I decided to check for a status, description and importance as the properties, 
     // that can be modified outside of the edit modal window
     useEffect(() => {
         setValues(formFields);
-    }, [formFields?.status]);
+    }, [formFields?.status, formFields?.description, formFields?.importance]);
 
     const [values, setValues] = useState(formFields);
     const [errors, setErrors] = useState({});

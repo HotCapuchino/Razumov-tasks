@@ -13,25 +13,33 @@ const ToDosList = observer((props) => {
 
     function renderToDos() {
         if (props.class_name === 'completed') {
-            return toDoList.completedToDos.map(toDo => {
-                toDo.fetchContributors();
-                toDo.fetchComments();
-                return (
-                    <li className={toDoListStyles.toDoItem} key={toDo.id}>
-                        <ToDo toDo={toDo}/>
-                    </li>
-                );
-            });
+            if (toDoList.completedToDos.length) {
+                return toDoList.completedToDos.map(toDo => {
+                    toDo.fetchContributors();
+                    toDo.fetchComments();
+                    return (
+                        <li className={toDoListStyles.toDoItem} key={toDo.id}>
+                            <ToDo toDo={toDo}/>
+                        </li>
+                    );
+                });
+            } else {
+                return null;
+            }
         } else {
-            return toDoList.searchedToDos.map(toDo => {
-                toDo.fetchContributors();
-                toDo.fetchComments();
-                return (
-                    <li className={toDoListStyles.toDoItem} key={toDo.id}>
-                        <ToDo toDo={toDo} chosen={toDo.id === toDoList.chosenToDo.id ? true : false}/>
-                    </li>
-                );
-            });
+            if (toDoList.searchedToDos.length) {
+                return toDoList.searchedToDos.map(toDo => {
+                    toDo.fetchContributors();
+                    toDo.fetchComments();
+                    return (
+                        <li className={toDoListStyles.toDoItem} key={toDo.id}>
+                            <ToDo toDo={toDo} chosen={toDo.id === toDoList?.chosenToDo?.id ? true : false}/>
+                        </li>
+                    );
+                });
+            } else {
+                return null;
+            }
         }
     }
 

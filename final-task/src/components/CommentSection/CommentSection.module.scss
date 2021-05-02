@@ -9,6 +9,7 @@
     @extend .flex-container-column;
     height: 100%;
     width: 25%;
+    padding-top: 20px;
 
     @include _max992 {
         display: none;
@@ -27,5 +28,28 @@
     &__noComments {
         @include font-options('Poppins', 16px, 700);
         color: $normal;
+    }
+}
+
+.commentsListDropdown {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    max-height: 500px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2) !important;
+    padding: 10px 5px;
+
+    @include _max480 {
+        width: 100% !important;
+    }
+
+    &__noComments {
+        @include font-options('Poppins', 16px, 700);
+        color: $normal;
+    }
+
+    &__listItem {
+        box-sizing: border-box !important;
+        height: auto !important;
+        padding: 0;
     }
 }

@@ -11,8 +11,10 @@
 }
 
 .photoContainer {
+    @extend .flex-container-row;
     width: 25%;
     margin-right: 10px;
+    justify-content: center;
 
     &__image {
         width: 50px;
@@ -26,9 +28,11 @@
     width: 75%;
 
     &__toDoName {
+        @extend .flex-container-row;
         @include font-options('Poppins', 10px, 500);
         text-align: left;
         margin-top: 5px;
+        flex-wrap: wrap;
 
         b {
             display: inline-block;

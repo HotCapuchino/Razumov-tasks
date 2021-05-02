@@ -2,11 +2,18 @@
 @import '../../styles/general/layout.scss';
 @import '../../styles/general/reset.css';
 @import '../../styles/mixins/fonts.scss';
+@import '../../styles/mixins/media.scss';
 
 .toDoCreatorWrapper {
     @extend .flex-container-row;
     height: 15%;
     align-items: center;
+
+    @include _max768 {
+        flex-direction: column;
+        height: auto;
+        margin-bottom: 20px;
+    }
 
     &__title {
         @include font-options('Poppins', 36px, 700);
@@ -22,6 +29,10 @@
         padding: 5px 25px;
         border-radius: 10px;
         border: 2px solid transparent;
+
+        @include _max768 {
+            margin-top: 20px;
+        }
 
         img {
             margin-right: 5px;

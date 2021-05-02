@@ -1,5 +1,6 @@
-import {action, makeAutoObservable, when} from 'mobx';
+import {action, makeAutoObservable} from 'mobx';
 import {api} from '../../utils/API';
+import {User} from '../User/User';
 
 
 class Users {
@@ -35,31 +36,6 @@ class Users {
             this.userNotifications = [];
         });
     }
-}
-
-class User {
-
-    id;
-    name; 
-    photo;
-    store;
-
-    constructor(store, id, name, photo) {
-        this.store = store;
-        this.id = id;
-        this.name = name;
-        this.photo = photo;
-        makeAutoObservable(this);
-    }
-
-    fetchNotifications() {
-        this.store.fetchNotifications(this.id);
-    }
-
-    clearNotifications() {
-        this.store.markAsViewed(this.id);
-    }
-
 }
 
 const users = new Users();

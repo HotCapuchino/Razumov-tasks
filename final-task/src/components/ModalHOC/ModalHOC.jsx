@@ -2,15 +2,16 @@ import React, {useContext,  useState} from 'react';
 import { users } from '../../store/Users/Users';
 import toDoList from '../../store/ToDoList/ToDoList';
 import { useForm } from '../../customHooks/useForm';
-import modalStyles from './Modal.module.scss';
 import {useToggle, calcIndex} from '../../customHooks/useToggle';
 import {observer} from 'mobx-react';
 import {userContext} from '../../customHooks/useLogin';
+import RenderComment from './RenderComment';
+import RenderCreate from './RenderCreate';
+import RenderEdit from './RenderEdit';
 
 const ModalHOC = (Component) => 
 
     observer(function InnerHOC({ setVisibility, visible, type, toDo }) {
-
         function defineFormFields() {
             switch (type) { 
                 case 'create': {
@@ -83,13 +84,12 @@ const ModalHOC = (Component) =>
                 break;
             }
             clearValues();
-            console.log(values);
         }
 
         function renderUsers() {
             return Object.keys(users.users).map(key => {
                 return (
-                    <option value={key}>
+                    <option value={key} key={key}>
                         {users.users[key].name}
                     </option>
                 );
@@ -98,78 +98,30 @@ const ModalHOC = (Component) =>
 
         function renderInnerWorld() {
             switch (type) {
-                case 'edit':
+                case 'edit': {
+                    return (
+                        <RenderEdit values={values}
+                        errors={errors}
+                        inputHandler={handleInput}
+                        errorVisibility={errorVisibility}/>
+                    )
+                }
                 case 'create': {
                     return (
-                        <form className={modalStyles.form}>
-                            <div className={modalStyles.descriptionBlock}>
-                                <div className={modalStyles.descriptionBlock__title}>ToDo description</div>
-                                {errors.description && errorVisibility ? <div className={modalStyles.errorMessage}>{errors.description}</div> : null}
-                                <textarea name='description'
-                                    value={values.description}
-                                    onChange={(e) => handleInput(e)}
-                                    className={modalStyles.textarea}></textarea>
-                            </div>
-                            <div>
-                                <label className={modalStyles.label}>Importance</label>
-                                {errors.importance && errorVisibility ? <div className={modalStyles.errorMessage}>{errors.importance}</div> : null}
-                                <select name='importance' 
-                                    value={values.importance} 
-                                    onChange={(e) => handleInput(e)}
-                                    className={modalStyles.select}>
-                                    <option value="minor">Minor</option>
-                                    <option value="normal">Normal</option>
-                                    <option value="critical">Critical</option>
-                                </select>
-                            </div>
-                            <div>
-                                {type === 'create' ? 
-                                    <>
-                                        <label className={modalStyles.label}>Executor</label>
-                                        <select name='executor_id' 
-                                            value={values.executor_id} 
-                                            onChange={(e) => handleInput(e)}
-                                            className={modalStyles.select}>
-                                            {renderUsers()}
-                                        </select> 
-                                    </>
-                                    : 
-                                    <>
-                                        <label className={modalStyles.label}>Status</label>
-                                        <select name='status' 
-                                            value={values.status} 
-                                            onChange={(e) => handleInput(e)}
-                                            className={modalStyles.select}>
-                                            <option value="pending">Pending</option>
-                                            <option value="inprogress">In Progress</option>
-                                            <option value="completed">Completed</option>
-                                            <option value="cancelled">Cancelled</option>
-                                        </select>
-                                    </>}
-                            </div>
-                        </form>
+                        <RenderCreate values={values}
+                            errors={errors}
+                            renderUsers={renderUsers}
+                            inputHandler={handleInput}
+                            errorVisibility={errorVisibility}/>
                     );
                 }
                 case 'comment': {
                     return (
-                        <form>
-                            <div className={modalStyles.toDoInfo}>
-                                <img alt='there has to be an image' src={users.users[toDo?.author_id]?.photo}
-                                    className={modalStyles.toDoInfo__photo}/>
-                                    <div className={modalStyles.userInfo}>
-                                    <div className={modalStyles.userInfo__name}>{users.users[toDo?.author_id]?.name}</div>
-                                        <div className={modalStyles.userInfo__text}>{toDo.description}</div>
-                                    </div>
-                            </div>
-                            <div>
-                                <label className={modalStyles.label}>Leave you comment here</label>
-                                {errors.comment && errorVisibility ? <div className={modalStyles.errorMessage}>{errors.comment}</div> : null}
-                                <textarea name='comment' 
-                                    value={values.comment} 
-                                    onChange={(e) => handleInput(e)}
-                                    className={modalStyles.textarea}></textarea>
-                            </div>
-                        </form>
+                        <RenderComment values={values} 
+                            errors={errors}
+                            toDo={toDo}
+                            inputHandler={handleInput}
+                            errorVisibility={errorVisibility}/>
                     );
                 }
             }

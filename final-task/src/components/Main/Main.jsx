@@ -16,11 +16,12 @@ const Main = observer(() => {
     const [userId,] = useContext(userContext);
 
     useEffect(() => {
+        console.log(loggedIn);
         if (loggedIn) {
             toDoList.fetchToDos();
             users.fetchNotifications(userId);
         }  
-    }, []);
+    }, [loggedIn]);
 
     return (
         <>
@@ -33,7 +34,7 @@ const Main = observer(() => {
                             <ToDosList listType='hold' />
                             <ToDosList listType='completed' />
                         </div>
-                        <CommentSection />
+                        <CommentSection type='block'/>
                     </div>
                 </div>
             : <Redirect to='/login'/>}
