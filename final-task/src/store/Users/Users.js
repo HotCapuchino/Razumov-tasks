@@ -2,7 +2,6 @@ import {action, makeAutoObservable} from 'mobx';
 import {api} from '../../utils/API';
 import {User} from '../User/User';
 
-
 class Users {
 
     users = {};

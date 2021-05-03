@@ -14,7 +14,9 @@ function SingleComment({ text, time, photo, commentatorName, toDoName, toDoOwner
             if (difference / multiplier < 1) {
                 break;
             } else {
-                interval = `about ${Math.round(difference / multiplier)} ${timeNames[i]} ago`
+                let timePassed = Math.round(difference / multiplier);
+                let timeTemplate = timePassed > 1 ? timeNames[i] : timeNames[i].slice(0, timeNames[i].length - 1);
+                interval = `about ${timePassed} ${timeTemplate} ago`;
             }
         }
         return interval;

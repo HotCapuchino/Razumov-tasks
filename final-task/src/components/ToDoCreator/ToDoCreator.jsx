@@ -6,7 +6,7 @@ import Modal from '../ModalHOC/Modal';
 
 const ToDoCreator = observer(() => {
 
-    let tasksAmount = toDoList.unfinishedToDos.length;
+    let tasksAmount = toDoList?.unfinishedToDos.length;
     const [modalVisible, setModalVisible] = useState(false);
     const [imgSrc, setImgSrc] = useState('/assets/icons/add_item_white.svg');
 

@@ -1,19 +1,42 @@
 import { useEffect } from 'react';
 import {useState} from 'react';
 
-
-const useForm = (formFields) => {
+const useForm = ({type, toDo}) => {
 
     // because of the fact react doesn't provide deep comparison,
     // when it decides whether to rerender component or not, 
     // I decided to check for a status, description and importance as the properties, 
     // that can be modified outside of the edit modal window
     useEffect(() => {
-        setValues(formFields);
-    }, [formFields?.status, formFields?.description, formFields?.importance]);
+        setValues(defineFormFields());
+    }, [toDo?.status, toDo?.description, toDo?.importance]);
 
-    const [values, setValues] = useState(formFields);
+    const [values, setValues] = useState(defineFormFields());
     const [errors, setErrors] = useState({});
+
+    function defineFormFields() {
+        switch (type) { 
+            case 'create': {
+                return {
+                    description: '',
+                    importance: 'minor',
+                    executor_id: 1
+                }
+            }
+            case 'edit': {
+                return {
+                    description: toDo.description,
+                    status: toDo.status,
+                    importance: toDo.importance
+                };
+            }
+            case 'comment': {
+                return {
+                    comment: ''
+                }
+            }
+        }
+    }
 
     function handleInput(e) {
         setValues(prevState => ({

@@ -29,7 +29,7 @@ class ToDoItem {
             this.contributors = [];
             for (const contributor of data.contributors_list) {
                 if (contributor.role === 'author') {
-                    this.author_id = contributor.user_id;
+                    runInAction(() => this.author_id = contributor.user_id);
                     this.contributors.unshift(contributor);
                 } else if (contributor.role === 'executor') {
                     this.executor_id = contributor.user_id;
@@ -38,7 +38,7 @@ class ToDoItem {
                     this.contributors.push(contributor);
                 }
             }
-        })).catch(err => {});
+        })).catch(err => {console.log(err)});
     }
 
     fetchComments() {
@@ -46,7 +46,7 @@ class ToDoItem {
         .then(action((data) => {
             this.comments = data.comments_list;
         }))
-        .catch(err => {});
+        .catch(err => console.log(err));
     }
 
     toggle(author_id, toggler_name) {
@@ -66,7 +66,6 @@ class ToDoItem {
     }
 
     leaveComment(user_id, userName, text) {
-        console.log(user_id, userName, text);
         this.store.api.addComment(this.id, user_id, text)
         .then(action(async(data) => {
             this.comments.push(data);
@@ -84,12 +83,12 @@ class ToDoItem {
                         this.contributors.push({
                             user_id: user_id,
                             role: 'commentator'
-                        })
+                        });
                     });
                 }
             }
             this.store.api.addNotification(this.author_id, `${userName} has left comment on your task`);
-        })).catch(err => {});
+        })).catch(err => console.log(err));
     }
     
 }

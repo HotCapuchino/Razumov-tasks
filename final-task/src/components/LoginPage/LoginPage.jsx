@@ -34,10 +34,10 @@ const LoginPage = observer(() => {
     }
 
     function handleLogin() {
-        sessionStorage.setItem('loggedin', true);
-        sessionStorage.setItem('userid', chosenId);
         setIsLogged(true);
         setUserId(Number(chosenId));
+        sessionStorage.setItem('loggedin', true);
+        sessionStorage.setItem('userid', chosenId);
     }
 
     return (

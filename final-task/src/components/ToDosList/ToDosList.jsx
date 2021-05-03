@@ -13,7 +13,7 @@ const ToDosList = observer((props) => {
 
     function renderToDos() {
         if (props.class_name === 'completed') {
-            if (toDoList.completedToDos.length) {
+            if (toDoList?.completedToDos.length) {
                 return toDoList.completedToDos.map(toDo => {
                     toDo.fetchContributors();
                     toDo.fetchComments();
@@ -27,7 +27,7 @@ const ToDosList = observer((props) => {
                 return null;
             }
         } else {
-            if (toDoList.searchedToDos.length) {
+            if (toDoList?.searchedToDos.length) {
                 return toDoList.searchedToDos.map(toDo => {
                     toDo.fetchContributors();
                     toDo.fetchComments();
@@ -51,7 +51,7 @@ const ToDosList = observer((props) => {
     }
 
     function renderComponent() {
-        if (toDoList.isLoading) {
+        if (toDoList?.isLoading) {
             return (
                 <div className={toDoListStyles.loadingWrapper + ' ' + toDoListStyles[props.class_name]}>
                     <Spinner animation='border' role='status' variant='primary'>

@@ -7,10 +7,10 @@ const RenderComment = observer(({ values, errors, inputHandler, toDo, errorVisib
     return (
         <form>
             <div className={modalStyles.toDoInfo}>
-                <img alt='there has to be an image' src={users.users[toDo?.author_id]?.photo}
+                <img alt='there has to be an image' src={users?.users[toDo?.author_id]?.photo}
                     className={modalStyles.toDoInfo__photo} />
                 <div className={modalStyles.userInfo}>
-                    <div className={modalStyles.userInfo__name}>{users.users[toDo?.author_id]?.name}</div>
+                    <div className={modalStyles.userInfo__name}>{users?.users[toDo?.author_id]?.name}</div>
                     <div className={modalStyles.userInfo__text}>{toDo.description}</div>
                 </div>
             </div>

@@ -4,7 +4,8 @@ import Main from './components/Main/Main';
 import LoginPage from './components/LoginPage/LoginPage';
 import {users} from './store/Users/Users';
 import {Redirect, Switch, Route} from 'react-router-dom';
-import {LoginContextProvider, UserContextProvider} from './customHooks/useLogin';
+import {LoginContextProvider, UserContextProvider} from './customHooks/useLogin'; 
+import WarningModal from './components/WarningModal/WarningModal';
 
 function App() {
   useEffect(() => {
@@ -20,6 +21,7 @@ function App() {
             <Route path='/login' component={LoginPage}/>
             <Redirect from='/' to='/login'/>
           </Switch>
+          <WarningModal/>
         </div>
       </UserContextProvider>
     </LoginContextProvider>

@@ -16,18 +16,17 @@ const Main = observer(() => {
     const [userId,] = useContext(userContext);
 
     useEffect(() => {
-        console.log(loggedIn);
         if (loggedIn) {
             toDoList.fetchToDos();
             users.fetchNotifications(userId);
-        }  
+        } 
     }, [loggedIn]);
 
     return (
         <>
             {loggedIn ?
                 <div className={mainStyles.mainWrapper}>
-                    <NavBar user={users.users[userId]}/>
+                    <NavBar user={users?.users[userId]}/>
                     <div className={mainStyles.contentBlock}>
                         <div className={mainStyles.toDoBlock}>
                             <ToDoCreator />

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
 import navStyles from './NavBar.module.scss';
 import { useSearch } from '../../customHooks/useSearch';
-import { Dropdown, Menu } from 'antd';
 import {observer} from 'mobx-react';
 import Notifications from '../Notifications/Notifications';
 import {loginContext, userContext} from '../../customHooks/useLogin';
+import UserInfo from '../UserInfo/UserInfo';
 
 const NavBar = observer(({user}) => {
 
@@ -27,16 +27,8 @@ const NavBar = observer(({user}) => {
     }
 
     function handleClearNotifications() {
-        console.log('click');
         user.clearNotifications();
     }
-
-    const userInfoMenu = (
-        <Menu>
-            <Menu.Item>{user?.name}</Menu.Item>
-            <Menu.Item onClick={handleLogOut}>Change User</Menu.Item>
-        </Menu>
-    );
 
     return (
         <nav className={navStyles.navBarWrapper}>
@@ -49,11 +41,7 @@ const NavBar = observer(({user}) => {
             </div>
             <div className={navStyles.userBlock}>
                 <Notifications clearNotifications={handleClearNotifications}/>
-                <div className={navStyles.userInfo}>
-                    <Dropdown trigger={['click']} overlay={userInfoMenu}>
-                        <img src={user?.photo} alt="pic profile" className={navStyles.userInfo__photo}/>
-                    </Dropdown>
-                </div>
+                <UserInfo user={user} logoutHandler={handleLogOut}/>
             </div>
         </nav>
     );

@@ -12,31 +12,7 @@ import RenderEdit from './RenderEdit';
 const ModalHOC = (Component) => 
 
     observer(function InnerHOC({ setVisibility, visible, type, toDo }) {
-        function defineFormFields() {
-            switch (type) { 
-                case 'create': {
-                    return {
-                        description: '',
-                        importance: 'minor',
-                        executor_id: 1
-                    }
-                }
-                case 'edit': {
-                    return {
-                        description: toDo.description,
-                        status: toDo.status,
-                        importance: toDo.importance
-                    };
-                }
-                case 'comment': {
-                    return {
-                        comment: ''
-                    }
-                }
-            }
-        }
-
-        const { values, handleInput, errors, validateInputs, clearValues } = useForm(defineFormFields());
+        const { values, handleInput, errors, validateInputs, clearValues } = useForm({type, toDo});
         const [errorVisibility, setErrorVisibility] = useState(false);
         const needToggle = useToggle();
         const [userNum,] = useContext(userContext);
@@ -48,7 +24,6 @@ const ModalHOC = (Component) =>
         function handleOkButton(modalType) {
             if (!validateInputs()) {
                 setErrorVisibility(true);
-                console.log('Some of the fields are empty!', values);
                 setTimeout(() => {
                     setErrorVisibility(false);
                 }, 2000)
@@ -57,7 +32,7 @@ const ModalHOC = (Component) =>
             switch (modalType) {
                 case 'edit': {
                     if (needToggle(toDo.status, calcIndex(values.status))) {
-                        toDo.toggle(toDo.author_id, users.users[userNum].name);
+                        toDo.toggle(toDo.author_id, users?.users[userNum]?.name);
                     }
                     toDo.edit({
                         description: values.description,
@@ -68,17 +43,17 @@ const ModalHOC = (Component) =>
                 }
                 break;
                 case 'comment': {
-                    toDo.leaveComment(Number(userNum), users.users[userNum].name, values.comment);
+                    toDo.leaveComment(Number(userNum), users?.users[userNum]?.name, values.comment);
                     handleCloseButton();
                 }
                 break;
                 case 'create': {
-                    let executor = values.executor_id || Object.keys(users.users)[0];
+                    let executor = values.executor_id || Object.keys(users?.users)[0];
                     toDoList.createToDo(values.description, 
                             values.importance, 
                             Number(executor), 
                             Number(userNum), 
-                            users.users[userNum].name);
+                            users?.users[userNum]?.name);
                     handleCloseButton();
                 }
                 break;
@@ -90,7 +65,7 @@ const ModalHOC = (Component) =>
             return Object.keys(users.users).map(key => {
                 return (
                     <option value={key} key={key}>
-                        {users.users[key].name}
+                        {users?.users[key]?.name}
                     </option>
                 );
             });

@@ -18,12 +18,12 @@ const CommentSection = observer(({type}) => {
                 let comment = toDoList.chosenToDo.comments[i];
                 let user = users.users[comment.user_id];
                 let singleComment = <SingleComment text={comment.text} 
-                                        commentatorName={user.name}
-                                        photo={user.photo}
-                                        toDoOwner={users.users[toDoList.chosenToDo.author_id].name} 
+                                        commentatorName={user?.name}
+                                        photo={user?.photo}
+                                        toDoOwner={users.users[toDoList.chosenToDo.author_id]?.name} 
                                         time={comment.time}
                                         toDoName={toDoList.chosenToDo.description}
-                                        currentUserName={users.users[userNum].name}/>;
+                                        currentUserName={users.users[userNum]?.name}/>;
                 if (type === 'block') {
                     comms.push(
                         <li key={i}>

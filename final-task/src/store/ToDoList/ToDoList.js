@@ -65,10 +65,10 @@ class ToDoList {
     removeToDo(id) {
         api.deleteToDo(id)
         .then(action(() => {
-            if (id === this.chosenToDo.id) {
+            if (id === this?.chosenToDo?.id) {
                 runInAction(() => {
                     this.chosenToDo = null;
-                })
+                });
             }
             runInAction(() => {
                 this.toDos = this.toDos.filter(function(toDo) {

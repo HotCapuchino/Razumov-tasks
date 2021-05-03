@@ -1,0 +1,20 @@
+@import '../../styles/general/colours.scss';
+@import '../../styles/general/layout.scss';
+@import '../../styles/general/reset.css';
+@import '../../styles/mixins/media.scss';
+
+.userInfo {
+    width: 25%;
+    border-radius: 100%;
+
+    @include _max480 {
+        width: 50%;
+    }   
+
+    &__photo {
+        cursor: pointer;
+        height: 40px;
+        width: 40px;
+        border-radius: 100%;
+    }
+}
