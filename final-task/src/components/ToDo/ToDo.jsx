@@ -22,11 +22,13 @@ const ToDo = observer(({ toDo, chosen }) => {
 
     useEffect(() => {
         function setCommentSectionType() {
-            if (window.innerWidth < 992) {
-                setIsCommentsDropdown(true);
-            } else {
-                setIsCommentsDropdown(false);
-            }
+            // Очень много условий "Если да, то да, если нет, то нет"
+            setIsCommentsDropdown(window.innerWidth < 992);
+            // if (window.innerWidth < 992) {
+            //     setIsCommentsDropdown(true);
+            // } else {
+            //     setIsCommentsDropdown(false);
+            // }
         }
         window.addEventListener('resize', setCommentSectionType);
         return () => {
@@ -34,23 +36,27 @@ const ToDo = observer(({ toDo, chosen }) => {
         }
     }, []);
 
+    // ??
     useEffect(() => {
         // this hook is responsible for an opportunity to delete toDo right after adding it
     }, [toDo?.author_id, toDo?.contributors]);
 
     function handleDropdownToDoActions(actionType) {
+        // break должен быть внутри блока
         switch (actionType) {
             case 'edit': {
                 setEditModalVisible(true);
+                break;
             }
-            break;
             case 'comment': {
                 setCommentModalVisible(true);
+                break;
             }
-            break;
             case 'delete': {
                 toDo.delete();
+                break;
             }
+            default: break;
         }
     }
 

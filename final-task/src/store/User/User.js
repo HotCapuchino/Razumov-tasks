@@ -7,11 +7,11 @@ class User {
     photo;
     store;
 
-    constructor(store, id, name, photo) {
+    constructor(store, user) {
         this.store = store;
-        this.id = id;
-        this.name = name;
-        this.photo = photo;
+        this.id = user.id;
+        this.name = user.name;
+        this.photo = user.photo;
         makeAutoObservable(this);
     }
 

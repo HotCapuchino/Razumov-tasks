@@ -15,9 +15,11 @@ class Users {
     fetchUsers() {
         this.api.fetchUsers()
         .then(action(data => {
-            for (const user of data) {
-                this.users[user.id] = new User(this, user.id, user.name, user.picture);
-            }
+            this.users = data.reduce((users, user) => {
+                users[user.id] = new User(this, user);
+
+                return users;
+            }, {});
         }))
         .catch(err => console.log(err));
     }

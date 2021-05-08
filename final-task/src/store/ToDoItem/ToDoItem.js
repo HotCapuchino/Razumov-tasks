@@ -71,7 +71,7 @@ class ToDoItem {
             this.comments.push(data);
             let needToBeAdded = true;
             for (const contributor of this.contributors) {
-                if (contributor.user_id == user_id) {
+                if (contributor.user_id === user_id) {
                     needToBeAdded = false;
                     break;
                 }

@@ -35,6 +35,8 @@ const useForm = ({type, toDo}) => {
                     comment: ''
                 }
             }
+            default: 
+                return {};
         }
     }
 

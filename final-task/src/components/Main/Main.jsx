@@ -20,7 +20,7 @@ const Main = observer(() => {
             toDoList.fetchToDos();
             users.fetchNotifications(userId);
         } 
-    }, [loggedIn]);
+    }, [userId, loggedIn]); // Надо указывать все зависимости
 
     return (
         <>

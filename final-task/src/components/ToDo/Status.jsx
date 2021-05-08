@@ -8,11 +8,15 @@ function Status({handleDropDownAction, status}) {
 
     function renderStatusMenu() {
         let statuses_list = [];
+        // Можно заменить на простой фильтр
         for (let i = 0; i < available_statuses.length; i++) {
-            if (available_statuses[i].toLowerCase().replace(' ', '') !== status) {
+            const _status = available_statuses[i].toLowerCase().replace(' ', '')
+            // if (available_statuses[i].toLowerCase().replace(' ', '') !== status) {
+            if (_status !== status) {
                 statuses_list.push(
                     <Menu.Item key={available_statuses[i]}
-                        onClick={() => handleDropDownAction(available_statuses[i].toLowerCase().replace(' ', ''), i)}>
+                        // onClick={() => handleDropDownAction(available_statuses[i].toLowerCase().replace(' ', ''), i)}>
+                        onClick={() => handleDropDownAction(_status, i)}>
                         {available_statuses[i]}
                     </Menu.Item>
                 );

@@ -9,6 +9,7 @@ const Contributors = observer(({toDo}) => {
         let contributors_list = [];
         let contributors_length = toDo.contributors.length;
         let end = contributors_length > 5 ? 4 : contributors_length;
+        // Это можно написать одним циклом
         for (let i = 0; i < end; i++) {
             contributors_list.push(
                 <li key={toDo.contributors[i].user_id} className={toDoStyle.contributor}>

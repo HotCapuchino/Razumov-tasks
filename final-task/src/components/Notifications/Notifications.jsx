@@ -13,7 +13,8 @@ const Notifications = observer(({ clearNotifications }) => {
             clearNotifications();
         }
 
-    }, [dropDownVisible])
+        // Need watch all dependences
+    }, [dropDownVisible, clearNotifications])
 
     function renderNotifications() {
         let notifications = users?.userNotifications.map((notification, index) => {
