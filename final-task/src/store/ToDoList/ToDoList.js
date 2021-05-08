@@ -72,7 +72,7 @@ class ToDoList {
             }
             runInAction(() => {
                 this.toDos = this.toDos.filter(function(toDo) {
-                    if (toDo.id !== id) return toDo;
+                    return toDo.id !== id
                 });
             })
         })).catch(err => console.log(err));

@@ -20,6 +20,7 @@ const NavBar = observer(({user}) => {
     }
 
     function handleLogOut() {
+        // Need use in context
         sessionStorage.setItem('loggedin', false);
         sessionStorage.removeItem('userid');
         setLoggedIn(false);

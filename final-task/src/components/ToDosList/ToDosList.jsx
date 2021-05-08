@@ -12,9 +12,11 @@ const ToDosList = observer((props) => {
     const [active, setActive] = useState(() => props.class_name !== 'completed');
 
     function renderToDos() {
+        // Условие можно сократить
         if (props.class_name === 'completed') {
             if (toDoList?.completedToDos.length) {
                 return toDoList.completedToDos.map(toDo => {
+                    // Запрос на каждый элемент массива -- плохо (представь если тут будет 1000 записей)
                     toDo.fetchContributors();
                     toDo.fetchComments();
                     return (

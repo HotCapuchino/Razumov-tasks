@@ -29,6 +29,7 @@ const ModalHOC = (Component) =>
                 }, 2000)
                 return;
             }
+            // break должен быть внутри блока case
             switch (modalType) {
                 case 'edit': {
                     if (needToggle(toDo.status, calcIndex(values.status))) {
@@ -40,13 +41,13 @@ const ModalHOC = (Component) =>
                         importance: values.importance
                     });
                     handleCloseButton();
+                    break;
                 }
-                break;
                 case 'comment': {
                     toDo.leaveComment(Number(userNum), users?.users[userNum]?.name, values.comment);
                     handleCloseButton();
+                    break;
                 }
-                break;
                 case 'create': {
                     let executor = values.executor_id || Object.keys(users?.users)[0];
                     toDoList.createToDo(values.description, 
@@ -55,8 +56,9 @@ const ModalHOC = (Component) =>
                             Number(userNum), 
                             users?.users[userNum]?.name);
                     handleCloseButton();
+                    break;
                 }
-                break;
+                default: break;
             }
             clearValues();
         }

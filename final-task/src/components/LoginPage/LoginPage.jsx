@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import React, {useContext, useEffect, useState} from 'react';
 import {Dropdown, Menu} from 'antd';
 import loginStyles from './LoginPage.module.scss';
@@ -36,6 +37,7 @@ const LoginPage = observer(() => {
     function handleLogin() {
         setIsLogged(true);
         setUserId(Number(chosenId));
+        // Это должно быть в контексте
         sessionStorage.setItem('loggedin', true);
         sessionStorage.setItem('userid', chosenId);
     }

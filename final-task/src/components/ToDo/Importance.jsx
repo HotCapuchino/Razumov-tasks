@@ -7,6 +7,7 @@ function Importance({importance}) {
         let extra_class = toDoStyle[`importanceWrapper__importance_${(importance).toLowerCase()}`];
         return (
             <div className={toDoStyle.importanceWrapper__importance + ' ' + extra_class}>
+                {/* У lodash или undersocre есть метод upperFirst */}
                 <span>{importance.charAt(0).toUpperCase() + importance.slice(1)}</span>
             </div>
         );
